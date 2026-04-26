@@ -23,7 +23,7 @@
   --font-b:'Barlow',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--white);font-family:var(--font-b);font-weight:300;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--white);font-family:var(--font-b);font-weight:300;overflow-x:hidden}
 
 /* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar{width:4px}
@@ -32,7 +32,7 @@ body{background:var(--bg);color:var(--white);font-family:var(--font-b);font-weig
 
 /* ─── NAV ─── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
+  position:fixed;top:0;left:0;right:0;z-index:380;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 40px;height:68px;
   background:rgba(10,10,10,0.96);backdrop-filter:blur(16px);
@@ -42,11 +42,6 @@ nav{
 nav.scrolled{height:56px;background:rgba(10,10,10,0.99)}
 .nav-logo{display:flex;align-items:center;gap:12px}
 .nav-logo img{height:44px;width:auto;object-fit:contain}
-.nav-logo-fb{
-  width:44px;height:44px;background:var(--red);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-d);font-size:22px;color:var(--white);letter-spacing:1px;flex-shrink:0;
-}
 .nav-wordmark{display:flex;flex-direction:column;line-height:1}
 .nav-wordmark strong{font-family:var(--font-d);font-size:22px;letter-spacing:3px;color:var(--white)}
 .nav-wordmark small{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
@@ -64,36 +59,43 @@ nav.scrolled{height:56px;background:rgba(10,10,10,0.99)}
   transition:background .2s,transform .15s;
 }
 .nav-cta:hover{background:var(--red2);transform:translateY(-1px)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;min-width:44px;min-height:44px;align-items:center;justify-content:center}
-.hamburger span{width:24px;height:1.5px;background:var(--white);display:block;transition:all .3s}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:400;position:relative}
+.hamburger span{width:26px;height:2px;background:var(--white);display:block;transition:all .3s;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ─── MOBILE MENU ─── */
 .mobile-menu{
-  display:none;position:fixed;inset:0;z-index:190;
-  background:rgba(10,10,10,.98);
+  display:none;position:fixed;inset:0;z-index:350;
+  background:rgba(10,10,10,.99);
   flex-direction:column;align-items:center;justify-content:center;gap:0;
+  padding-top:68px;
 }
 .mobile-menu.open{display:flex}
-.mobile-close{position:absolute;top:22px;right:28px;background:none;border:none;color:var(--muted);font-size:32px;cursor:pointer;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+.mobile-close{display:none}
 .mobile-menu a{
-  font-family:var(--font-d);font-size:52px;letter-spacing:4px;
-  color:rgba(255,255,255,.2);text-decoration:none;text-transform:uppercase;
-  padding:10px 60px;transition:color .2s;display:flex;align-items:center;justify-content:center;
-  min-height:60px;text-align:center;
+  font-family:var(--font-d);font-size:clamp(36px,10vw,52px);letter-spacing:4px;
+  color:rgba(255,255,255,.55);text-decoration:none;text-transform:uppercase;
+  padding:10px 40px;transition:color .2s;display:block;text-align:center;
+  -webkit-tap-highlight-color:transparent;
 }
 .mobile-menu a:hover,.mobile-menu a:active{color:var(--white)}
-.mobile-menu .m-cta{margin-top:28px;background:var(--red);color:var(--white)!important;padding:14px 48px!important;font-size:16px;font-family:var(--font-d);letter-spacing:4px;border-radius:2px}
+.mobile-menu .m-cta{
+  margin-top:28px;background:var(--red);color:var(--white);
+  padding:16px 52px;font-size:18px;font-family:var(--font-d);letter-spacing:4px;
+  border-radius:0;
+}
 
 /* ─── HERO ─── */
 .hero{
   min-height:100vh;position:relative;display:flex;
   flex-direction:column;justify-content:flex-end;
-  padding:0 60px 80px;overflow:hidden;
+  padding:68px 60px 80px;overflow:hidden;
 }
 .hero-bg{
   position:absolute;inset:0;
   background:url('gym-hero.jpg') center/cover no-repeat;
-  background-color:#1a1a1a;
 }
 .hero-overlay{
   position:absolute;inset:0;
@@ -107,8 +109,9 @@ nav.scrolled{height:56px;background:rgba(10,10,10,0.99)}
   padding:6px 16px;
   clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
   animation:fadeIn .8s 1.2s both;
+  z-index:2;
 }
-.hero-content{position:relative;z-index:2;max-width:720px}
+.hero-content{position:relative;z-index:2;max-width:720px;width:100%}
 .hero-tag{
   font-size:11px;letter-spacing:5px;text-transform:uppercase;
   color:var(--red);margin-bottom:16px;
@@ -118,9 +121,10 @@ nav.scrolled{height:56px;background:rgba(10,10,10,0.99)}
 .hero-tag::before{content:'';width:32px;height:1px;background:var(--red)}
 .hero-title{
   font-family:var(--font-d);
-  font-size:clamp(72px,13vw,160px);
+  font-size:clamp(64px,13vw,160px);
   line-height:.88;letter-spacing:2px;
   animation:slideUp .6s .35s both;
+  word-break:break-word;
 }
 .hero-title .stroke{-webkit-text-stroke:2px var(--white);color:transparent}
 .hero-title .accent{color:var(--red)}
@@ -138,23 +142,21 @@ nav.scrolled{height:56px;background:rgba(10,10,10,0.99)}
   letter-spacing:2px;text-transform:uppercase;text-decoration:none;
   border:none;cursor:pointer;
   clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
-  transition:background .2s,transform .15s;display:inline-flex;align-items:center;justify-content:center;
-  min-height:48px;font-family:var(--font-b);
+  transition:background .2s,transform .15s;display:inline-block;
 }
 .btn-red:hover{background:var(--red2);transform:translateY(-2px)}
-.btn-red:active{background:var(--red2)}
 .btn-ghost{
   color:var(--white);border:1px solid var(--muted2);
   padding:16px 40px;font-size:12px;
   letter-spacing:2px;text-transform:uppercase;text-decoration:none;
-  display:inline-flex;align-items:center;justify-content:center;
-  transition:all .2s;min-height:48px;
+  display:inline-block;transition:all .2s;
 }
 .btn-ghost:hover{border-color:var(--white)}
 .hero-stats{
   position:absolute;bottom:80px;right:60px;
   display:flex;gap:48px;z-index:2;
   animation:fadeIn .6s .9s both;
+  max-width:calc(100% - 120px);
 }
 .h-stat{text-align:center}
 .h-stat-num{font-family:var(--font-d);font-size:52px;color:var(--red);line-height:1}
@@ -198,6 +200,8 @@ section{padding:110px 60px}
   transition:all .2s;cursor:default;
 }
 .pill:hover{border-color:var(--red);color:var(--white)}
+
+/* About image collage */
 .about-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:6px}
 .about-imgs .img-main{grid-column:1/-1}
 .about-imgs img{width:100%;height:100%;object-fit:cover;display:block}
@@ -207,7 +211,7 @@ section{padding:110px 60px}
 .img-frame img{transition:transform .6s ease}
 .img-frame:hover img{transform:scale(1.05)}
 
-/* ─── GALLERY ─── */
+/* ─── GALLERY / EQUIPMENT ─── */
 .gallery{background:var(--bg);padding-bottom:0}
 .gallery-hdr{max-width:1240px;margin:0 auto 50px;display:flex;justify-content:space-between;align-items:flex-end}
 .gallery-grid{
@@ -225,6 +229,7 @@ section{padding:110px 60px}
   background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
   font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);
 }
+/* grid placement */
 .g-item:nth-child(1){grid-column:1/6;grid-row:1}
 .g-item:nth-child(2){grid-column:6/9;grid-row:1}
 .g-item:nth-child(3){grid-column:9/13;grid-row:1}
@@ -237,13 +242,16 @@ section{padding:110px 60px}
 .plans-inner{max-width:1240px;margin:0 auto}
 .plans-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;flex-wrap:wrap;gap:20px}
 .plans-note{font-size:13px;color:var(--muted);max-width:340px;line-height:1.7}
+
+/* Tab switcher */
 .plan-tabs{display:flex;gap:0;margin-bottom:40px;border:1px solid var(--border);width:fit-content}
 .plan-tab{
   padding:10px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;
   background:transparent;border:none;color:var(--muted);cursor:pointer;
-  transition:all .2s;font-family:var(--font-b);min-height:44px;
+  transition:all .2s;font-family:var(--font-b);
 }
 .plan-tab.active{background:var(--red);color:var(--white)}
+
 .plans-block{display:none}
 .plans-block.active{display:block}
 .plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
@@ -275,11 +283,11 @@ section{padding:110px 60px}
 .plan-feats li::before{content:'—';color:var(--red);font-size:10px}
 .plan-feats li.yes::before{content:'✓';color:var(--red)}
 .plan-cta{
-  display:flex;align-items:center;justify-content:center;text-align:center;
+  display:block;text-align:center;
   background:transparent;border:1px solid var(--border);
   color:var(--muted);padding:11px;font-size:11px;letter-spacing:2px;
   text-transform:uppercase;text-decoration:none;margin-top:28px;
-  transition:all .25s;min-height:44px;
+  transition:all .25s;
 }
 .plan-card:hover .plan-cta,.plan-card.hot .plan-cta{
   background:var(--red);border-color:var(--red);color:var(--white);
@@ -295,7 +303,7 @@ section{padding:110px 60px}
 .trainer-note-text strong{font-family:var(--font-d);font-size:22px;letter-spacing:2px;color:var(--yellow);display:block;margin-bottom:4px}
 .trainer-note-text span{font-size:13px;color:var(--muted)}
 
-/* ─── TRAINER ─── */
+/* ─── TRAINER SECTION ─── */
 .trainer{background:var(--bg);overflow:hidden}
 .trainer-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
 .trainer-img{position:relative;overflow:hidden;min-height:600px}
@@ -308,7 +316,7 @@ section{padding:110px 60px}
   background:var(--bg);padding:80px 60px;
   display:flex;flex-direction:column;justify-content:center;
 }
-.trainer-content .s-label{margin-bottom:16px}
+.trainer-content .s-title{margin-bottom:24px}
 .trainer-name{font-family:var(--font-d);font-size:48px;letter-spacing:3px;color:var(--red);line-height:1;margin-bottom:4px}
 .trainer-role{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
 .trainer-bio{font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:36px}
@@ -326,7 +334,29 @@ section{padding:110px 60px}
 .trainer-contact-text strong{display:block;font-size:14px;font-weight:500;color:var(--white)}
 .trainer-contact-text small{font-size:11px;color:var(--muted);letter-spacing:1px}
 
-/* ─── LOCATION ─── */
+/* ─── INSTAGRAM REELS ─── */
+.reels-section{background:var(--bg);padding:80px 60px}
+.reels-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,320px));
+  gap:16px;
+  justify-content:center;
+  margin-top:0;
+}
+.reel-wrap{
+  position:relative;
+  width:100%;
+  padding-top:177.77%; /* 9:16 aspect ratio */
+  overflow:hidden;
+  background:#111;
+  border:1px solid var(--border);
+}
+.reel-wrap iframe{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  border:none;
+}
 .location{background:var(--bg2)}
 .location-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 .location-info .s-title{margin-bottom:28px}
@@ -341,8 +371,16 @@ section{padding:110px 60px}
 .map-embed{
   border:1px solid var(--border);overflow:hidden;
   height:380px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--card);
 }
-.map-embed iframe{width:100%;height:100%;border:none;filter:grayscale(60%) contrast(1.1)}
+.map-embed iframe{width:100%;height:100%;border:none;filter:grayscale(80%) invert(10%)}
+.map-placeholder{text-align:center;padding:40px}
+.map-placeholder a{
+  display:inline-block;margin-top:16px;
+  background:var(--red);color:var(--white);
+  padding:12px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;
+}
 
 /* ─── FOOTER ─── */
 footer{
@@ -352,8 +390,6 @@ footer{
 .footer-inner{max-width:1240px;margin:0 auto}
 .footer-top{display:flex;gap:80px;justify-content:space-between;flex-wrap:wrap;margin-bottom:50px}
 .footer-brand img{height:48px;margin-bottom:12px}
-.footer-brand-fb{font-family:var(--font-d);font-size:32px;letter-spacing:3px;color:var(--white);margin-bottom:12px}
-.footer-brand-fb span{color:var(--red)}
 .footer-brand p{font-size:12px;color:var(--muted);line-height:1.8;max-width:240px;margin-top:8px}
 .footer-col h4{font-family:var(--font-d);font-size:18px;letter-spacing:2px;color:var(--white);margin-bottom:18px}
 .footer-col ul{list-style:none}
@@ -376,7 +412,7 @@ footer{
 
 /* ─── FLOATING WA ─── */
 .wa-float{
-  position:fixed;bottom:28px;right:28px;z-index:300;
+  position:fixed;bottom:28px;right:28px;z-index:200;
   background:#25D366;width:58px;height:58px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   text-decoration:none;
@@ -388,147 +424,56 @@ footer{
 .wa-float svg{width:28px;height:28px;fill:white}
 @keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)}50%{box-shadow:0 4px 32px rgba(37,211,102,.7)}}
 
-/* ─── REVEAL ─── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
-.reveal.in{opacity:1;transform:translateY(0)}
-
-/* ════════════════════════════════════════════════
-   MOBILE — everything below 900px
-   ════════════════════════════════════════════════ */
+/* ─── RESPONSIVE ─── */
 @media(max-width:900px){
-  /* NAV */
-  nav{padding:0 18px;height:58px}
+  nav{padding:0 20px}
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
-  .nav-logo img{height:36px}
-  .nav-wordmark strong{font-size:18px}
-
-  /* HERO */
-  section{padding:64px 20px}
-  .hero{padding:0 20px 36px;min-height:100vh}
-  .hero-overlay{
-    background:linear-gradient(to top, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.75) 45%, rgba(10,10,10,0.3) 100%);
-  }
-  .hero-badge{top:70px;right:16px;font-size:10px;padding:4px 12px}
-  .hero-title{font-size:clamp(72px,20vw,110px)}
-  .hero-tag{font-size:9px;letter-spacing:3px;margin-bottom:10px}
-  .hero-tagline{margin-top:12px;font-size:10px}
-  .hero-actions{
-    margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:10px;
-  }
-  .btn-red,.btn-ghost{padding:14px 12px;font-size:11px;clip-path:none;border-radius:2px}
-  .hero-stats{
-    position:static;display:grid;grid-template-columns:repeat(3,1fr);
-    gap:1px;background:var(--border);margin-top:22px;
-  }
-  .h-stat{background:rgba(10,10,10,.9);padding:13px 6px;text-align:center}
-  .h-stat-num{font-size:28px}
-  .h-stat-lbl{font-size:8px}
-
-  /* ABOUT */
-  .about-inner{grid-template-columns:1fr;gap:32px}
-  .about-imgs .img-main img{height:210px}
-  .about-imgs .img-sm img{height:130px}
-  .about-text .s-title{font-size:clamp(52px,14vw,72px)}
-  .about-pills{gap:7px;margin-top:18px}
-  .pill{font-size:10px;padding:5px 12px}
-
-  /* GALLERY */
-  .gallery-hdr{flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:20px}
-  .gallery-grid{
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:auto;
-    gap:3px;
-  }
-  .g-item:nth-child(n){grid-column:auto;grid-row:auto;aspect-ratio:1}
-  .g-item .g-lbl{font-size:9px;padding:20px 8px 8px}
-
-  /* REELS — carousel on mobile, 3-col on desktop */
-  .reels-section{padding:64px 0 0}
-  .reels-header{padding:0 20px 24px}
-  .reel-carousel-wrap{position:relative;overflow:hidden;touch-action:pan-y}
-  .reel-track{display:flex;transition:transform .35s cubic-bezier(.4,0,.2,1);will-change:transform}
-  .reel-slide{flex:0 0 100%;padding:0 20px}
-  .reel-slide blockquote{
-    background:#FFF!important;border:0!important;border-radius:3px!important;
-    box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15)!important;
-    margin:0!important;max-width:100%!important;min-width:0!important;padding:0!important;width:100%!important;
-  }
-  .reel-nav{display:flex!important;align-items:center;justify-content:center;gap:16px;padding:16px 0 0}
-  .reel-btn{
-    width:48px;height:48px;border:1px solid var(--border);
-    background:var(--card);color:var(--white);
-    font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-    border-radius:2px;-webkit-tap-highlight-color:transparent;
-  }
-  .reel-btn:active{border-color:var(--red)}
-  .reel-counter{font-family:var(--font-d);font-size:22px;color:var(--muted);letter-spacing:2px;min-width:52px;text-align:center}
-  .reel-counter b{color:var(--white)}
-  .reel-dots{display:flex!important;gap:7px;justify-content:center;margin-top:12px}
-  .r-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:background .2s;cursor:pointer}
-  .r-dot.on{background:var(--red)}
-  /* hide desktop grid on mobile */
-  .reels-desktop-grid{display:none!important}
-  .reels-footer{padding:16px 20px 60px;text-align:center}
-
-  /* PLANS */
-  .plans-hdr{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:28px}
-  .plan-tabs{width:100%}
-  .plan-tab{flex:1;padding:12px 8px;font-size:10px}
-  /* horizontal scroll cards */
-  .plans-grid{
-    display:flex;gap:10px;
-    overflow-x:auto;scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    padding:4px 0 14px;
-    margin:0 -20px;padding-left:20px;padding-right:20px;
-  }
-  .plans-grid::-webkit-scrollbar{height:2px}
-  .plans-grid::-webkit-scrollbar-thumb{background:var(--red)}
-  .plan-card{
-    flex:0 0 265px;scroll-snap-align:start;
-    transform:none!important;
-  }
-  .plan-card:hover{transform:none!important}
-  .plan-dots{display:flex!important;gap:7px;justify-content:center;margin-top:10px}
-  .plan-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:background .2s;cursor:pointer}
-  .plan-dot.on{background:var(--red)}
-  .trainer-note{flex-direction:column;gap:12px;padding:18px}
-  .trainer-note-icon{font-size:26px}
-  .trainer-note-text strong{font-size:18px}
-
-  /* TRAINER */
-  .trainer-inner{grid-template-columns:1fr}
-  .trainer-img{min-height:300px}
-  .trainer-img::after{background:linear-gradient(to bottom,transparent 55%,var(--bg))}
-  .trainer-content{padding:28px 20px 60px}
-  .trainer-name{font-size:36px}
-  .trainer-bio{font-size:14px}
-
-  /* LOCATION */
-  .location-inner{grid-template-columns:1fr;gap:28px}
-  .location-info .s-title{font-size:clamp(50px,14vw,72px)}
-  .map-embed{height:240px}
-  .loc-btns-mobile{display:grid!important;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-
-  /* FOOTER */
-  footer{padding:44px 20px 28px}
-  .footer-top{gap:36px}
-  .footer-brand p{max-width:100%}
-  .footer-cols-mobile{display:grid!important;grid-template-columns:1fr 1fr;gap:24px}
+  section{padding:60px 20px}
+  .reels-section{padding:60px 20px}
+  .hero{padding:68px 20px 60px}
+  .hero-stats{display:none}
+  .hero-badge{top:80px;right:20px;font-size:11px;max-width:calc(100% - 40px)}
+  .hero-title{font-size:clamp(52px,13vw,90px)}
+  .hero-content{max-width:100%}
+  .about-inner,.trainer-inner,.location-inner{grid-template-columns:1fr;gap:40px}
+  .about-imgs .img-main img{height:240px}
+  .about-imgs .img-sm img{height:150px}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:4px}
+  .g-item:nth-child(n){grid-column:auto;grid-row:auto}
+  .plans-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .trainer-img{min-height:380px}
+  .trainer-content{padding:40px 20px}
+  .gallery-hdr{flex-direction:column;align-items:flex-start;gap:16px}
+  footer{padding:48px 20px 24px}
+  .footer-top{gap:32px}
+  .map-embed{height:280px}
+  .reels-grid{grid-template-columns:repeat(2,minmax(0,280px));gap:12px}
+  .trainer-note{flex-direction:column;align-items:flex-start}
+  .plans-hdr{flex-direction:column;align-items:flex-start}
+  .hero-actions{gap:10px}
 }
-
 @media(max-width:580px){
-  .hero-title{font-size:clamp(64px,18vw,90px)}
-  .mobile-menu a{font-size:40px}
+  .plans-grid{grid-template-columns:1fr;gap:8px}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:12px}
+  .hero{padding:80px 16px 50px}
+  .hero-title{font-size:clamp(48px,14vw,72px);line-height:.9}
+  .hero-badge{top:76px;right:16px;font-size:10px;padding:4px 12px}
+  .reels-grid{grid-template-columns:minmax(0,380px);gap:16px}
+  section{padding:50px 16px}
+  .reels-section{padding:50px 16px}
+  nav{padding:0 16px}
+  .about-pills{gap:6px}
+  .plan-tabs{width:100%}
+  .plan-tab{flex:1;padding:10px 8px;font-size:10px}
+  footer{padding:40px 16px 20px}
+  .footer-top{flex-direction:column;gap:28px}
+  .hero-tagline{font-size:11px;letter-spacing:2px}
+  .hero-tag{font-size:10px}
+  .btn-red,.btn-ghost{padding:14px 28px;font-size:11px}
+  .gallery-grid{grid-template-columns:1fr;gap:4px}
+  .g-item{height:200px}
 }
-
-/* Elements only shown on mobile */
-.reel-nav{display:none}
-.reel-dots{display:none}
-.plan-dots{display:none}
-.loc-btns-mobile{display:none}
-.footer-cols-mobile{display:none}
 </style>
 </head>
 <body>
@@ -541,11 +486,10 @@ footer{
 <!-- ── NAV ── -->
 <nav id="mainNav">
   <div class="nav-logo">
-    <img src="logo.png" alt="Prime Fitness Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-    <div class="nav-logo-fb" style="display:none">PF</div>
+    <img src="logo.png" alt="Prime Fitness Logo"/>
     <div class="nav-wordmark">
       <strong>PRIME FITNESS</strong>
-      <small>MALEGAON</small>
+      <small>Malegaon</small>
     </div>
   </div>
   <ul class="nav-links">
@@ -571,7 +515,7 @@ footer{
   <a href="#plans" onclick="closeMobileMenu()">Pricing</a>
   <a href="#trainer" onclick="closeMobileMenu()">Trainer</a>
   <a href="#location" onclick="closeMobileMenu()">Location</a>
-  <a href="https://wa.me/918459236002" target="_blank" class="m-cta" onclick="closeMobileMenu()">Join Now →</a>
+  <a href="https://wa.me/918459236002" target="_blank" class="m-cta">Join Now →</a>
 </nav>
 
 <!-- ── HERO ── -->
@@ -590,19 +534,19 @@ footer{
       <a href="#plans" class="btn-red">View Plans</a>
       <a href="#gallery" class="btn-ghost">Explore Gym</a>
     </div>
-    <div class="hero-stats">
-      <div class="h-stat">
-        <div class="h-stat-num">50+</div>
-        <div class="h-stat-lbl">Machines</div>
-      </div>
-      <div class="h-stat">
-        <div class="h-stat-num">AC</div>
-        <div class="h-stat-lbl">Facility</div>
-      </div>
-      <div class="h-stat">
-        <div class="h-stat-num">₹999</div>
-        <div class="h-stat-lbl">From / Month</div>
-      </div>
+  </div>
+  <div class="hero-stats">
+    <div class="h-stat">
+      <div class="h-stat-num">50+</div>
+      <div class="h-stat-lbl">Machines</div>
+    </div>
+    <div class="h-stat">
+      <div class="h-stat-num">AC</div>
+      <div class="h-stat-lbl">Facility</div>
+    </div>
+    <div class="h-stat">
+      <div class="h-stat-num">₹999</div>
+      <div class="h-stat-lbl">From / Month</div>
     </div>
   </div>
   <div class="hero-strip"></div>
@@ -611,6 +555,7 @@ footer{
 <!-- ── MARQUEE ── -->
 <div class="marquee-wrap">
   <div class="marquee-track">
+    <!-- doubled for seamless loop -->
     <span class="marquee-item">STRENGTH TRAINING</span>
     <span class="marquee-item">CARDIO ZONE</span>
     <span class="marquee-item">PERSONAL TRAINING</span>
@@ -629,18 +574,21 @@ footer{
 <!-- ── ABOUT ── -->
 <section class="about" id="about">
   <div class="about-inner">
-    <div class="about-imgs reveal">
+    <div class="about-imgs">
+      <!-- MAIN: wide gym interior shot — best overview -->
       <div class="img-frame img-main">
-        <img src="gym-opening.jpg" alt="Prime Fitness Gym Interior" loading="lazy"/>
+        <img src="gym-opening.jpg" alt="Prime Fitness Gym Interior"/>
       </div>
+      <!-- SM LEFT: people working out -->
       <div class="img-frame img-sm">
-        <img src="gym-members.jpg" alt="Gym Members Training" loading="lazy"/>
+        <img src="gym-members.jpg" alt="Gym Members Training"/>
       </div>
+      <!-- SM RIGHT: equipment detail -->
       <div class="img-frame img-sm">
-        <img src="gym-equipment.jpg" alt="Equipment Close Up" loading="lazy"/>
+        <img src="gym-equipment.jpg" alt="Equipment Close Up"/>
       </div>
     </div>
-    <div class="about-text reveal" style="transition-delay:.1s">
+    <div class="about-text">
       <div class="s-label">Who We Are</div>
       <h2 class="s-title">YOUR<br>PRIME<br>ZONE</h2>
       <p class="s-body">Prime Fitness is Malegaon's newest and most modern gym, built for those who refuse to settle for average. Every machine, every mirror, every square foot is designed to push you further.</p>
@@ -662,7 +610,7 @@ footer{
 
 <!-- ── GALLERY ── -->
 <section class="gallery" id="gallery" style="padding-bottom:0">
-  <div class="gallery-hdr reveal">
+  <div class="gallery-hdr">
     <div>
       <div class="s-label">Inside Prime Fitness</div>
       <h2 class="s-title" style="font-size:clamp(40px,6vw,72px)">THE<br>FLOOR</h2>
@@ -670,70 +618,72 @@ footer{
     <a href="https://wa.me/918459236002" target="_blank" class="btn-ghost" style="margin-bottom:8px">Book a Free Tour →</a>
   </div>
   <div class="gallery-grid">
-    <div class="g-item reveal"><img src="gym-hero.jpg" alt="Gym Overview" loading="lazy"/><div class="g-lbl">Main Floor</div></div>
-    <div class="g-item reveal" style="transition-delay:.06s"><img src="gym-members.jpg" alt="Gym Grand Opening" loading="lazy"/><div class="g-lbl">Grand Opening</div></div>
-    <div class="g-item reveal" style="transition-delay:.12s"><img src="gym-trainer.jpg" alt="Trainer on Machine" loading="lazy"/><div class="g-lbl">Training Zone</div></div>
-    <div class="g-item reveal" style="transition-delay:.18s"><img src="gym-opening.jpg" alt="Opening Day" loading="lazy"/><div class="g-lbl">Opening Day</div></div>
-    <div class="g-item reveal" style="transition-delay:.24s"><img src="gym-equipment.jpg" alt="Equipment Area" loading="lazy"/><div class="g-lbl">Equipment</div></div>
-    <div class="g-item reveal" style="transition-delay:.30s"><img src="gym-floor.jpg" alt="Members" loading="lazy"/><div class="g-lbl">Members</div></div>
+    <!-- Image 1: Gym wide/empty - best hero of the space -->
+    <div class="g-item">
+      <img src="gym-hero.jpg" alt="Gym Overview"/>
+      <div class="g-lbl">Main Floor</div>
+    </div>
+    <!-- Image 2: Gym with balloons portrait -->
+    <div class="g-item">
+      <img src="gym-members.jpg" alt="Gym Grand Opening"/>
+      <div class="g-lbl">Grand Opening</div>
+    </div>
+    <!-- Image 3: Trainer on machine -->
+    <div class="g-item">
+      <img src="gym-trainer.jpg" alt="Trainer on Machine"/>
+      <div class="g-lbl">Training Zone</div>
+    </div>
+    <!-- Image 4: Opening day with people -->
+    <div class="g-item">
+      <img src="gym-opening.jpg" alt="Opening Day"/>
+      <div class="g-lbl">Opening Day</div>
+    </div>
+    <!-- Image 5: Equipment close up -->
+    <div class="g-item">
+      <img src="gym-equipment.jpg" alt="Equipment Area"/>
+      <div class="g-lbl">Equipment</div>
+    </div>
+    <!-- Image 6: Members working out -->
+    <div class="g-item">
+      <img src="gym-floor.jpg" alt="Members"/>
+      <div class="g-lbl">Members</div>
+    </div>
   </div>
 </section>
-
 <!-- ── INSTAGRAM REELS ── -->
-<section class="reels-section" id="reels" style="background:var(--bg);padding:80px 60px 0">
+<section class="reels-section" id="reels">
   <div style="max-width:1240px;margin:0 auto">
 
-    <div class="reels-header" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px">
       <div>
         <div class="s-label">Follow Our Journey</div>
         <h2 class="s-title" style="font-size:clamp(40px,6vw,72px)">REELS &amp;<br>UPDATES</h2>
         <p style="font-size:13px;color:var(--muted);margin-top:12px">Follow <strong style="color:var(--white)">@prime_fitness_41</strong> for workouts, tips &amp; transformations.</p>
       </div>
       <a href="https://www.instagram.com/prime_fitness_41" target="_blank"
-         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);padding:14px 28px;text-decoration:none;color:white;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);flex-shrink:0;min-height:48px">
+         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);padding:14px 28px;text-decoration:none;color:white;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);flex-shrink:0">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         Follow on Instagram
       </a>
     </div>
 
-    <!-- MOBILE: carousel (hidden on desktop) -->
-    <div class="reel-carousel-wrap" id="reelCarousel">
-      <div class="reel-track" id="reelTrack">
-        <div class="reel-slide">
-          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;flex-direction:row;align-items:center"><div style="background-color:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center"><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;margin-bottom:6px;width:100px"></div><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap"><a href="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by It's_your_prime (@prime_fitness41)</a></p></div></blockquote>
-        </div>
-        <div class="reel-slide">
-          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;flex-direction:row;align-items:center"><div style="background-color:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center"><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;margin-bottom:6px;width:100px"></div><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap"><a href="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by Pruthviraj Chavan (@pruthviraj__chavan_9489)</a></p></div></blockquote>
-        </div>
-        <div class="reel-slide">
-          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;flex-direction:row;align-items:center"><div style="background-color:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center"><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;margin-bottom:6px;width:100px"></div><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap"><a href="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by Pruthviraj Chavan (@pruthviraj__chavan_9489)</a></p></div></blockquote>
-        </div>
-      </div>
-    </div>
-    <!-- Mobile reel controls -->
-    <div class="reel-nav" id="reelNav">
-      <button class="reel-btn" id="reelPrev">&#8592;</button>
-      <div class="reel-counter"><b id="reelCur">1</b> / 3</div>
-      <button class="reel-btn" id="reelNext">&#8594;</button>
-    </div>
-    <div class="reel-dots" id="reelDots">
-      <div class="r-dot on"></div><div class="r-dot"></div><div class="r-dot"></div>
+    <div class="reels-grid">
+
+      <div class="reel-wrap"><iframe src="https://www.instagram.com/reel/DWDXKvOEl9q/embed/" frameborder="0" scrolling="no" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
+
+      <div class="reel-wrap"><iframe src="https://www.instagram.com/reel/DT4IWccCslK/embed/" frameborder="0" scrolling="no" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
+
+      <div class="reel-wrap"><iframe src="https://www.instagram.com/reel/DVU6iG1DOij/embed/" frameborder="0" scrolling="no" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>
+
     </div>
 
-    <!-- DESKTOP: 3-col grid (hidden on mobile via CSS) -->
-    <div class="reels-desktop-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
-      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;align-items:center"><div style="background:#F4F4F4;border-radius:50%;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1"><div style="background:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px"></div><div style="background:#F4F4F4;border-radius:4px;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center"><a href="https://www.instagram.com/reel/DWDXKvOEl9q/" style="color:#c9c8cd;font-size:14px;text-decoration:none" target="_blank">A post shared by It's_your_prime (@prime_fitness41)</a></p></div></blockquote>
-      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;align-items:center"><div style="background:#F4F4F4;border-radius:50%;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1"><div style="background:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px"></div><div style="background:#F4F4F4;border-radius:4px;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center"><a href="https://www.instagram.com/reel/DT4IWccCslK/" style="color:#c9c8cd;font-size:14px;text-decoration:none" target="_blank">A post shared by Pruthviraj Chavan (@pruthviraj__chavan_9489)</a></p></div></blockquote>
-      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;align-items:center"><div style="background:#F4F4F4;border-radius:50%;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1"><div style="background:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px"></div><div style="background:#F4F4F4;border-radius:4px;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center"><a href="https://www.instagram.com/reel/DVU6iG1DOij/" style="color:#c9c8cd;font-size:14px;text-decoration:none" target="_blank">A post shared by Pruthviraj Chavan (@pruthviraj__chavan_9489)</a></p></div></blockquote>
-    </div>
 
-    <script async src="//www.instagram.com/embed.js"></script>
-    <div class="reels-footer" style="margin-top:24px;text-align:center;padding-bottom:0">
+    <div style="margin-top:32px;text-align:center">
       <a href="https://www.instagram.com/prime_fitness_41" target="_blank" class="btn-ghost">View All Reels on Instagram →</a>
     </div>
+
   </div>
 </section>
-
 <!-- ── PLANS ── -->
 <section class="plans" id="plans">
   <div class="plans-inner">
@@ -744,6 +694,8 @@ footer{
       </div>
       <p class="plans-note">Flexible membership plans built for every goal. No hidden fees. Cancel anytime.</p>
     </div>
+
+    <!-- Tab switcher -->
     <div class="plan-tabs">
       <button class="plan-tab active" onclick="switchPlan('gym',this)">Gym Only</button>
       <button class="plan-tab" onclick="switchPlan('cardio',this)">Gym + Cardio</button>
@@ -752,50 +704,60 @@ footer{
     <!-- GYM ONLY -->
     <div class="plans-block active" id="block-gym">
       <div class="plans-grid">
-        <div class="plan-card reveal">
+        <div class="plan-card">
           <div class="plan-dur">1 Month</div>
           <div class="plan-price"><sup>₹</sup>999</div>
           <div class="plan-mo">per month</div>
           <div class="plan-sep"></div>
           <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li><li class="yes">Expert Guidance</li><li class="yes">AC Facility</li><li>Cardio Machines</li>
+            <li class="yes">Full Gym Access</li>
+            <li class="yes">Expert Guidance</li>
+            <li class="yes">AC Facility</li>
+            <li>Cardio Machines</li>
           </ul>
           <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+1+Month+Gym+plan+%E2%82%B9999" target="_blank" class="plan-cta">Get Started</a>
         </div>
-        <div class="plan-card reveal" style="transition-delay:.08s">
+        <div class="plan-card">
           <div class="plan-dur">3 Months</div>
           <div class="plan-price"><sup>₹</sup>2699</div>
           <div class="plan-mo">₹900/month</div>
           <div class="plan-sep"></div>
           <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li><li class="yes">Expert Guidance</li><li class="yes">AC Facility</li><li>Cardio Machines</li>
+            <li class="yes">Full Gym Access</li>
+            <li class="yes">Expert Guidance</li>
+            <li class="yes">AC Facility</li>
+            <li>Cardio Machines</li>
           </ul>
           <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+3+Month+Gym+plan+%E2%82%B92699" target="_blank" class="plan-cta">Get Started</a>
         </div>
-        <div class="plan-card hot reveal" style="transition-delay:.16s">
+        <div class="plan-card hot">
           <div class="hot-badge">BEST VALUE</div>
           <div class="plan-dur">6 Months</div>
           <div class="plan-price"><sup>₹</sup>5399</div>
           <div class="plan-mo">₹900/month</div>
           <div class="plan-sep"></div>
           <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li><li class="yes">Expert Guidance</li><li class="yes">AC Facility</li><li class="yes">Diet Tips</li>
+            <li class="yes">Full Gym Access</li>
+            <li class="yes">Expert Guidance</li>
+            <li class="yes">AC Facility</li>
+            <li class="yes">Diet Tips</li>
           </ul>
           <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+6+Month+Gym+plan+%E2%82%B95399" target="_blank" class="plan-cta">Get Started</a>
         </div>
-        <div class="plan-card reveal" style="transition-delay:.24s">
+        <div class="plan-card">
           <div class="plan-dur">12 Months</div>
           <div class="plan-price"><sup>₹</sup>10799</div>
           <div class="plan-mo">₹900/month</div>
           <div class="plan-sep"></div>
           <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li><li class="yes">Expert Guidance</li><li class="yes">AC Facility</li><li class="yes">Diet Tips</li><li class="yes">Progress Tracking</li>
+            <li class="yes">Full Gym Access</li>
+            <li class="yes">Expert Guidance</li>
+            <li class="yes">AC Facility</li>
+            <li class="yes">Diet Tips</li>
+            <li class="yes">Progress Tracking</li>
           </ul>
           <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+12+Month+Gym+plan+%E2%82%B910799" target="_blank" class="plan-cta">Get Started</a>
         </div>
-      </div>
-      <div class="plan-dots" id="gymDots">
-        <div class="plan-dot on"></div><div class="plan-dot"></div><div class="plan-dot"></div><div class="plan-dot"></div>
       </div>
     </div>
 
@@ -808,7 +770,10 @@ footer{
           <div class="plan-mo">per month</div>
           <div class="plan-sep"></div>
           <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li><li class="yes">All Cardio Machines</li><li class="yes">Expert Guidance</li><li class="yes">AC Facility</li>
+            <li class="yes">Full Gym Access</li>
+            <li class="yes">All Cardio Machines</li>
+            <li class="yes">Expert Guidance</li>
+            <li class="yes">AC Facility</li>
           </ul>
           <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+1+Month+Gym%2BCardio+plan+%E2%82%B91499" target="_blank" class="plan-cta">Get Started</a>
         </div>
@@ -818,7 +783,10 @@ footer{
           <div class="plan-mo">₹1300/month</div>
           <div class="plan-sep"></div>
           <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li><li class="yes">All Cardio Machines</li><li class="yes">Expert Guidance</li><li class="yes">AC Facility</li>
+            <li class="yes">Full Gym Access</li>
+            <li class="yes">All Cardio Machines</li>
+            <li class="yes">Expert Guidance</li>
+            <li class="yes">AC Facility</li>
           </ul>
           <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+3+Month+Gym%2BCardio+plan+%E2%82%B93899" target="_blank" class="plan-cta">Get Started</a>
         </div>
@@ -829,7 +797,11 @@ footer{
           <div class="plan-mo">₹1300/month</div>
           <div class="plan-sep"></div>
           <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li><li class="yes">All Cardio Machines</li><li class="yes">Expert Guidance</li><li class="yes">AC Facility</li><li class="yes">Diet Tips</li>
+            <li class="yes">Full Gym Access</li>
+            <li class="yes">All Cardio Machines</li>
+            <li class="yes">Expert Guidance</li>
+            <li class="yes">AC Facility</li>
+            <li class="yes">Diet Tips</li>
           </ul>
           <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+6+Month+Gym%2BCardio+plan+%E2%82%B97799" target="_blank" class="plan-cta">Get Started</a>
         </div>
@@ -839,17 +811,20 @@ footer{
           <div class="plan-mo">₹1300/month</div>
           <div class="plan-sep"></div>
           <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li><li class="yes">All Cardio Machines</li><li class="yes">Expert Guidance</li><li class="yes">AC Facility</li><li class="yes">Diet Tips</li><li class="yes">Progress Tracking</li>
+            <li class="yes">Full Gym Access</li>
+            <li class="yes">All Cardio Machines</li>
+            <li class="yes">Expert Guidance</li>
+            <li class="yes">AC Facility</li>
+            <li class="yes">Diet Tips</li>
+            <li class="yes">Progress Tracking</li>
           </ul>
           <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+12+Month+Gym%2BCardio+plan+%E2%82%B915599" target="_blank" class="plan-cta">Get Started</a>
         </div>
       </div>
-      <div class="plan-dots" id="cardioDots">
-        <div class="plan-dot on"></div><div class="plan-dot"></div><div class="plan-dot"></div><div class="plan-dot"></div>
-      </div>
     </div>
 
-    <div class="trainer-note reveal">
+    <!-- Personal Trainer note -->
+    <div class="trainer-note">
       <div class="trainer-note-icon">💪</div>
       <div class="trainer-note-text">
         <strong>Personal Training Available</strong>
@@ -863,8 +838,9 @@ footer{
 <!-- ── TRAINER ── -->
 <section class="trainer" id="trainer">
   <div class="trainer-inner">
+    <!-- Trainer working out on machine -->
     <div class="trainer-img">
-      <img src="gym-trainer.jpg" alt="Pruthviraj Chavan - Trainer" loading="lazy"/>
+      <img src="gym-trainer.jpg" alt="Pruthviraj Chavan - Trainer"/>
     </div>
     <div class="trainer-content">
       <div class="s-label">Meet Your Trainer</div>
@@ -887,7 +863,7 @@ footer{
 <!-- ── LOCATION ── -->
 <section class="location" id="location">
   <div class="location-inner">
-    <div class="location-info reveal">
+    <div class="location-info">
       <div class="s-label">Find Us</div>
       <h2 class="s-title">VISIT<br>US</h2>
       <div style="margin-top:32px">
@@ -895,7 +871,7 @@ footer{
           <div class="loc-icon">📍</div>
           <div class="loc-text">
             <strong>Address</strong>
-            <span>Gilankar Nagar, infront of M.S.G College,<br>besides Kabra Book Store &amp; Swapna Purti Classes,<br>Malegaon</span>
+            <span>Gilankar Nagar, infront of M.S.G College,<br>besides Kabra Book Store & Swapna Purti Classes,<br>Malegaon</span>
           </div>
         </div>
         <div class="loc-detail">
@@ -913,18 +889,12 @@ footer{
           </div>
         </div>
       </div>
-      <!-- Desktop buttons -->
-      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap" class="loc-btns-desk">
+      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
         <a href="https://wa.me/918459236002" target="_blank" class="btn-red">WhatsApp Us</a>
         <a href="https://maps.google.com/?q=HG58%2BQG+Malegaon+Maharashtra" target="_blank" class="btn-ghost">Get Directions</a>
       </div>
-      <!-- Mobile buttons (2-col grid) -->
-      <div class="loc-btns-mobile">
-        <a href="https://wa.me/918459236002" target="_blank" class="btn-red">WhatsApp Us</a>
-        <a href="https://maps.google.com/?q=HG58%2BQG+Malegaon+Maharashtra" target="_blank" class="btn-ghost">Directions</a>
-      </div>
     </div>
-    <div class="map-embed reveal" style="transition-delay:.1s">
+    <div class="map-embed">
       <iframe
         src="https://maps.google.com/maps?q=HG58%2BQG+Malegaon+Maharashtra&output=embed&z=18"
         width="100%" height="100%"
@@ -940,45 +910,35 @@ footer{
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="logo.png" alt="Prime Fitness" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
-        <div class="footer-brand-fb" style="display:none">PRIME <span>FITNESS</span></div>
+        <img src="logo.png" alt="Prime Fitness"/>
         <p>Become the best version of you — the prime version. Malegaon's most modern gym.</p>
       </div>
-      <!-- Desktop 3-col nav (hidden mobile, shown via footer-cols-mobile below) -->
-      <div class="footer-col" style="display:block">
+      <div class="footer-col">
         <h4>Navigate</h4>
         <ul>
-          <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#plans">Pricing</a></li><li><a href="#trainer">Trainer</a></li><li><a href="#location">Location</a></li>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#plans">Pricing</a></li>
+          <li><a href="#trainer">Trainer</a></li>
+          <li><a href="#location">Location</a></li>
         </ul>
       </div>
-      <div class="footer-col" style="display:block">
+      <div class="footer-col">
         <h4>Plans</h4>
         <ul>
-          <li><a href="#plans">1 Month — ₹999</a></li><li><a href="#plans">3 Months — ₹2,699</a></li><li><a href="#plans">6 Months — ₹5,399</a></li><li><a href="#plans">12 Months — ₹10,799</a></li><li><a href="#plans">Gym + Cardio Plans</a></li>
+          <li><a href="#plans">1 Month — ₹999</a></li>
+          <li><a href="#plans">3 Months — ₹2,699</a></li>
+          <li><a href="#plans">6 Months — ₹5,399</a></li>
+          <li><a href="#plans">12 Months — ₹10,799</a></li>
+          <li><a href="#plans">Gym + Cardio Plans</a></li>
         </ul>
       </div>
-      <div class="footer-col" style="display:block">
+      <div class="footer-col">
         <h4>Contact</h4>
         <ul>
           <li><a href="https://wa.me/918459236002" target="_blank">+91 84592 36002</a></li>
           <li><a href="#location">Gilankar Nagar, Malegaon</a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- Mobile 2-col footer grid -->
-    <div class="footer-cols-mobile">
-      <div class="footer-col">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#plans">Pricing</a></li><li><a href="#trainer">Trainer</a></li><li><a href="#location">Location</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="https://wa.me/918459236002" target="_blank">+91 84592 36002</a></li>
-          <li><a href="#location">Gilankar Nagar,<br>Malegaon</a></li>
-          <li><a href="#plans">Plans from ₹999</a></li>
         </ul>
       </div>
     </div>
@@ -994,90 +954,48 @@ footer{
 </footer>
 
 <script>
-// Nav scroll
-window.addEventListener('scroll',function(){
+// Nav scroll effect
+window.addEventListener('scroll',()=>{
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
-},{passive:true});
+});
 
-// Mobile menu — FIXED: properly restores body scroll
-document.getElementById('menuBtn').addEventListener('click',function(){
+// Mobile menu
+document.getElementById('menuBtn').addEventListener('click',()=>{
   document.getElementById('mobileMenu').classList.add('open');
+  document.getElementById('menuBtn').classList.add('open');
   document.body.style.overflow='hidden';
 });
 document.getElementById('menuClose').addEventListener('click',closeMobileMenu);
 function closeMobileMenu(){
   document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('open');
   document.body.style.overflow='';
 }
 
 // Plan tabs
-function switchPlan(type,btn){
-  document.querySelectorAll('.plan-tab').forEach(function(t){t.classList.remove('active')});
-  document.querySelectorAll('.plans-block').forEach(function(b){b.classList.remove('active')});
+function switchPlan(type, btn){
+  document.querySelectorAll('.plan-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.plans-block').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('block-'+type).classList.add('active');
 }
 
-// Plan scroll dots
-function setupPlanDots(gridId,dotsId){
-  var grid=document.getElementById(gridId);
-  var dotsEl=document.getElementById(dotsId);
-  if(!grid||!dotsEl)return;
-  var dots=dotsEl.querySelectorAll('.plan-dot');
-  grid.addEventListener('scroll',function(){
-    var i=Math.round(grid.scrollLeft/275);
-    dots.forEach(function(d,j){d.classList.toggle('on',i===j)});
-  },{passive:true});
-  dots.forEach(function(d,i){
-    d.addEventListener('click',function(){grid.scrollTo({left:i*275,behavior:'smooth'})});
+// Scroll reveal (simple IntersectionObserver)
+const revealEls = document.querySelectorAll('.about-inner, .gallery-hdr, .g-item, .plan-card, .trainer-inner, .location-inner, .trainer-note');
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
   });
-}
-setupPlanDots('block-gym','gymDots');
-// cardio grid inside block-cardio
-var cGrid=document.querySelector('#block-cardio .plans-grid');
-if(cGrid)cGrid.id='block-cardio-grid';
-setupPlanDots('block-cardio-grid','cardioDots');
-
-// Reel carousel
-var ri=0,total=3;
-var track=document.getElementById('reelTrack');
-var cur=document.getElementById('reelCur');
-var rdots=document.getElementById('reelDots');
-
-function goReel(d){
-  ri=(ri+d+total)%total;
-  track.style.transform='translateX(-'+ri*100+'%)';
-  if(cur)cur.textContent=ri+1;
-  if(rdots){
-    rdots.querySelectorAll('.r-dot').forEach(function(dot,i){dot.classList.toggle('on',i===ri)});
-  }
-}
-var rNext=document.getElementById('reelNext');
-var rPrev=document.getElementById('reelPrev');
-if(rNext)rNext.addEventListener('click',function(){goReel(1)});
-if(rPrev)rPrev.addEventListener('click',function(){goReel(-1)});
-if(rdots){
-  rdots.querySelectorAll('.r-dot').forEach(function(d,i){
-    d.addEventListener('click',function(){goReel(i-ri)});
-  });
-}
-
-// Touch swipe reels
-var tx=0;
-var rc=document.getElementById('reelCarousel');
-if(rc){
-  rc.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
-  rc.addEventListener('touchend',function(e){
-    var diff=tx-e.changedTouches[0].clientX;
-    if(Math.abs(diff)>44)goReel(diff>0?1:-1);
-  },{passive:true});
-}
-
-// Scroll reveal
-var obs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')});
-},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+},{threshold:0.12});
+revealEls.forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(28px)';
+  el.style.transition='opacity .6s ease, transform .6s ease';
+  observer.observe(el);
+});
 </script>
 </body>
 </html>
