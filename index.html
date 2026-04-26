@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <title>Prime Fitness – Malegaon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
@@ -21,12 +21,13 @@
   --muted2:#444;
   --font-d:'Bebas Neue',sans-serif;
   --font-b:'Barlow',sans-serif;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--white);font-family:var(--font-b);font-weight:300;overflow-x:hidden}
+body{background:var(--bg);color:var(--white);font-family:var(--font-b);font-weight:300;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 
 /* ─── SCROLLBAR ─── */
-::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--red)}
 
@@ -34,55 +35,42 @@ body{background:var(--bg);color:var(--white);font-family:var(--font-b);font-weig
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;height:68px;
-  background:rgba(10,10,10,0.96);backdrop-filter:blur(16px);
+  padding:0 16px;height:60px;
+  background:rgba(10,10,10,0.97);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
-  transition:all .3s;
 }
-nav.scrolled{height:56px;background:rgba(10,10,10,0.99)}
-.nav-logo{display:flex;align-items:center;gap:12px}
-.nav-logo img{height:44px;width:auto;object-fit:contain}
-.nav-wordmark{display:flex;flex-direction:column;line-height:1}
-.nav-wordmark strong{font-family:var(--font-d);font-size:22px;letter-spacing:3px;color:var(--white)}
-.nav-wordmark small{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color .2s;position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width .3s}
-.nav-links a:hover{color:var(--white)}
-.nav-links a:hover::after{width:100%}
-.nav-cta{
-  background:var(--red);color:var(--white);
-  padding:10px 24px;font-size:11px;font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;text-decoration:none;
-  border:none;cursor:pointer;
-  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
-  transition:background .2s,transform .15s;
-}
-.nav-cta:hover{background:var(--red2);transform:translateY(-1px)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hamburger span{width:24px;height:1.5px;background:var(--white);display:block;transition:all .3s}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:38px;width:auto;object-fit:contain}
+.nav-wordmark strong{font-family:var(--font-d);font-size:20px;letter-spacing:3px;color:var(--white);display:block;line-height:1}
+.nav-wordmark small{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.nav-links,.nav-cta-desk{display:none}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+.hamburger span{width:22px;height:1.5px;background:var(--white);display:block;transition:all .3s}
 
 /* ─── MOBILE MENU ─── */
 .mobile-menu{
   display:none;position:fixed;inset:0;z-index:190;
   background:rgba(10,10,10,.98);
   flex-direction:column;align-items:center;justify-content:center;gap:0;
+  overflow-y:auto;
 }
 .mobile-menu.open{display:flex}
-.mobile-close{position:absolute;top:22px;right:28px;background:none;border:none;color:var(--muted);font-size:32px;cursor:pointer}
+.mobile-close{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--muted);font-size:28px;cursor:pointer;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
 .mobile-menu a{
-  font-family:var(--font-d);font-size:52px;letter-spacing:4px;
+  font-family:var(--font-d);font-size:44px;letter-spacing:4px;
   color:rgba(255,255,255,.2);text-decoration:none;text-transform:uppercase;
-  padding:10px 60px;transition:color .2s;display:block;text-align:center;
+  padding:8px 40px;transition:color .2s;display:block;text-align:center;
+  min-height:56px;display:flex;align-items:center;justify-content:center;
 }
-.mobile-menu a:hover{color:var(--white)}
-.mobile-menu .m-cta{margin-top:28px;background:var(--red);color:var(--white);padding:14px 48px;font-size:16px;font-family:var(--font-d);letter-spacing:4px}
+.mobile-menu a:active{color:var(--white)}
+.mobile-menu .m-cta{margin-top:20px;background:var(--red);color:var(--white);padding:14px 40px;font-size:16px;font-family:var(--font-d);letter-spacing:4px;border-radius:2px}
 
 /* ─── HERO ─── */
 .hero{
-  min-height:100vh;position:relative;display:flex;
+  min-height:100svh;position:relative;display:flex;
   flex-direction:column;justify-content:flex-end;
-  padding:0 60px 80px;overflow:hidden;
+  padding:0 20px 40px;overflow:hidden;
+  padding-bottom:calc(40px + var(--safe-bottom));
 }
 .hero-bg{
   position:absolute;inset:0;
@@ -90,332 +78,365 @@ nav.scrolled{height:56px;background:rgba(10,10,10,0.99)}
 }
 .hero-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to right, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.3) 100%),
-             linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 50%);
+  background:linear-gradient(to top, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.7) 45%, rgba(10,10,10,0.3) 100%);
 }
 .hero-badge{
-  position:absolute;top:100px;right:60px;
+  position:absolute;top:72px;right:16px;
   background:var(--yellow);color:#111;
-  font-family:var(--font-d);font-size:13px;letter-spacing:3px;
-  padding:6px 16px;
-  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  font-family:var(--font-d);font-size:11px;letter-spacing:2px;
+  padding:5px 12px;
+  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
   animation:fadeIn .8s 1.2s both;
 }
-.hero-content{position:relative;z-index:2;max-width:720px}
+.hero-content{position:relative;z-index:2;width:100%}
 .hero-tag{
-  font-size:11px;letter-spacing:5px;text-transform:uppercase;
-  color:var(--red);margin-bottom:16px;
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--red);margin-bottom:12px;
   animation:slideUp .6s .2s both;
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:10px;
 }
-.hero-tag::before{content:'';width:32px;height:1px;background:var(--red)}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--red)}
 .hero-title{
   font-family:var(--font-d);
-  font-size:clamp(72px,13vw,160px);
+  font-size:clamp(80px,22vw,130px);
   line-height:.88;letter-spacing:2px;
   animation:slideUp .6s .35s both;
 }
-.hero-title .stroke{-webkit-text-stroke:2px var(--white);color:transparent}
+.hero-title .stroke{-webkit-text-stroke:1.5px var(--white);color:transparent}
 .hero-title .accent{color:var(--red)}
 .hero-tagline{
-  margin-top:20px;font-size:13px;letter-spacing:3px;text-transform:uppercase;
+  margin-top:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;
   color:var(--muted);animation:slideUp .6s .5s both;
 }
 .hero-actions{
-  margin-top:40px;display:flex;gap:14px;align-items:center;
+  margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:10px;
   animation:slideUp .6s .65s both;
 }
-.btn-red{
-  background:var(--red);color:var(--white);
-  padding:16px 40px;font-size:12px;font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;text-decoration:none;
-  border:none;cursor:pointer;
-  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
-  transition:background .2s,transform .15s;display:inline-block;
-}
-.btn-red:hover{background:var(--red2);transform:translateY(-2px)}
-.btn-ghost{
-  color:var(--white);border:1px solid var(--muted2);
-  padding:16px 40px;font-size:12px;
-  letter-spacing:2px;text-transform:uppercase;text-decoration:none;
-  display:inline-block;transition:all .2s;
-}
-.btn-ghost:hover{border-color:var(--white)}
 .hero-stats{
-  position:absolute;bottom:80px;right:60px;
-  display:flex;gap:48px;z-index:2;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  margin-top:28px;
   animation:fadeIn .6s .9s both;
+  position:relative;z-index:2;
 }
-.h-stat{text-align:center}
-.h-stat-num{font-family:var(--font-d);font-size:52px;color:var(--red);line-height:1}
-.h-stat-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.h-stat{background:rgba(10,10,10,0.85);padding:14px 8px;text-align:center}
+.h-stat-num{font-family:var(--font-d);font-size:32px;color:var(--red);line-height:1}
+.h-stat-lbl{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:3px}
 .hero-strip{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red)}
 
-@keyframes slideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+.btn-red{
+  background:var(--red);color:var(--white);
+  padding:14px 20px;font-size:11px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;text-decoration:none;
+  border:none;cursor:pointer;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  transition:background .2s;display:inline-block;text-align:center;
+  min-height:44px;display:flex;align-items:center;justify-content:center;
+}
+.btn-red:active{background:var(--red2)}
+.btn-ghost{
+  color:var(--white);border:1px solid var(--muted2);
+  padding:14px 20px;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;text-decoration:none;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+  min-height:44px;
+}
+.btn-ghost:active{border-color:var(--white)}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* ─── MARQUEE ─── */
 .marquee-wrap{
-  background:var(--red);padding:14px 0;overflow:hidden;
+  background:var(--red);padding:12px 0;overflow:hidden;
   border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(0,0,0,.3);
 }
-.marquee-track{display:flex;gap:0;animation:marquee 18s linear infinite;width:max-content}
+.marquee-track{display:flex;gap:0;animation:marquee 16s linear infinite;width:max-content}
 .marquee-item{
-  font-family:var(--font-d);font-size:18px;letter-spacing:4px;
-  color:rgba(255,255,255,.9);white-space:nowrap;padding:0 40px;
-  display:flex;align-items:center;gap:40px;
+  font-family:var(--font-d);font-size:16px;letter-spacing:3px;
+  color:rgba(255,255,255,.9);white-space:nowrap;padding:0 28px;
+  display:flex;align-items:center;gap:28px;
 }
-.marquee-item::after{content:'✦';color:rgba(255,255,255,.4);font-size:10px}
+.marquee-item::after{content:'✦';color:rgba(255,255,255,.4);font-size:9px}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ─── SECTION BASE ─── */
-section{padding:110px 60px}
-.s-label{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:12px}
-.s-label::before{content:'';width:28px;height:1px;background:var(--red)}
-.s-title{font-family:var(--font-d);font-size:clamp(44px,7vw,88px);line-height:.92;letter-spacing:1px;margin-bottom:0}
-.s-body{font-size:15px;line-height:1.9;color:var(--muted);max-width:480px}
+section{padding:64px 20px}
+.s-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.s-label::before{content:'';width:20px;height:1px;background:var(--red)}
+.s-title{font-family:var(--font-d);font-size:clamp(52px,14vw,88px);line-height:.92;letter-spacing:1px}
+.s-body{font-size:14px;line-height:1.85;color:var(--muted)}
 
 /* ─── ABOUT ─── */
 .about{background:var(--bg2)}
-.about-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.about-text .s-title{margin-bottom:28px}
-.about-text p{margin-bottom:16px}
-.about-text p:last-of-type{margin-bottom:32px}
-.about-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.about-inner{display:flex;flex-direction:column;gap:32px}
+.about-text .s-title{margin-bottom:20px}
+.about-text p{margin-bottom:14px}
+.about-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .pill{
-  border:1px solid var(--border);padding:6px 16px;
-  font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
-  transition:all .2s;cursor:default;
+  border:1px solid var(--border);padding:6px 14px;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
 }
-.pill:hover{border-color:var(--red);color:var(--white)}
-
-/* About image collage */
-.about-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:6px}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:4px}
 .about-imgs .img-main{grid-column:1/-1}
 .about-imgs img{width:100%;height:100%;object-fit:cover;display:block}
-.about-imgs .img-main img{height:340px}
-.about-imgs .img-sm img{height:190px}
+.about-imgs .img-main img{height:220px}
+.about-imgs .img-sm img{height:130px}
 .img-frame{overflow:hidden;position:relative}
-.img-frame img{transition:transform .6s ease}
-.img-frame:hover img{transform:scale(1.05)}
 
-/* ─── GALLERY / EQUIPMENT ─── */
+/* ─── GALLERY ─── */
 .gallery{background:var(--bg);padding-bottom:0}
-.gallery-hdr{max-width:1240px;margin:0 auto 50px;display:flex;justify-content:space-between;align-items:flex-end}
+.gallery-hdr{margin-bottom:24px}
 .gallery-grid{
   display:grid;
-  grid-template-columns:repeat(12,1fr);
-  grid-template-rows:320px 280px;
-  gap:4px;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
 }
-.g-item{overflow:hidden;position:relative}
-.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;filter:brightness(.85)}
-.g-item:hover img{transform:scale(1.06);filter:brightness(1)}
+.g-item{overflow:hidden;position:relative;aspect-ratio:1}
+.g-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.85)}
 .g-item .g-lbl{
   position:absolute;bottom:0;left:0;right:0;
-  padding:50px 20px 16px;
+  padding:30px 10px 10px;
   background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
-  font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);
 }
-/* grid placement */
-.g-item:nth-child(1){grid-column:1/6;grid-row:1}
-.g-item:nth-child(2){grid-column:6/9;grid-row:1}
-.g-item:nth-child(3){grid-column:9/13;grid-row:1}
-.g-item:nth-child(4){grid-column:1/5;grid-row:2}
-.g-item:nth-child(5){grid-column:5/9;grid-row:2}
-.g-item:nth-child(6){grid-column:9/13;grid-row:2}
 
 /* ─── PLANS ─── */
 .plans{background:var(--bg2)}
-.plans-inner{max-width:1240px;margin:0 auto}
-.plans-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;flex-wrap:wrap;gap:20px}
-.plans-note{font-size:13px;color:var(--muted);max-width:340px;line-height:1.7}
-
-/* Tab switcher */
-.plan-tabs{display:flex;gap:0;margin-bottom:40px;border:1px solid var(--border);width:fit-content}
+.plans-hdr{margin-bottom:32px}
+.plans-note{font-size:13px;color:var(--muted);line-height:1.7;margin-top:12px}
+.plan-tabs{display:flex;gap:0;border:1px solid var(--border);width:100%;margin-bottom:24px}
 .plan-tab{
-  padding:10px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  flex:1;padding:12px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;
   background:transparent;border:none;color:var(--muted);cursor:pointer;
-  transition:all .2s;font-family:var(--font-b);
+  transition:all .2s;font-family:var(--font-b);min-height:44px;
 }
 .plan-tab.active{background:var(--red);color:var(--white)}
-
 .plans-block{display:none}
 .plans-block.active{display:block}
-.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+
+/* Mobile plan cards — horizontal scroll */
+.plans-scroll{
+  display:flex;gap:12px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:16px;
+  padding-right:20px;
+  margin:0 -20px;
+  padding-left:20px;
+}
+.plans-scroll::-webkit-scrollbar{height:3px}
+.plans-scroll::-webkit-scrollbar-track{background:var(--bg)}
+.plans-scroll::-webkit-scrollbar-thumb{background:var(--red)}
 .plan-card{
   background:var(--card);border:1px solid var(--border);
-  padding:36px 26px;transition:border-color .25s,transform .25s;
+  padding:28px 22px;
   position:relative;overflow:hidden;
+  flex:0 0 260px;
+  scroll-snap-align:start;
+  border-top:3px solid var(--border);
 }
-.plan-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:var(--border);transition:background .25s;
-}
-.plan-card:hover{border-color:var(--red);transform:translateY(-4px)}
-.plan-card:hover::before{background:var(--red)}
-.plan-card.hot::before{background:var(--red)}
-.plan-card.hot{border-color:var(--red)}
+.plan-card.hot{border-top:3px solid var(--red);border-color:var(--red)}
 .hot-badge{
-  position:absolute;top:14px;right:14px;
+  position:absolute;top:12px;right:12px;
   background:var(--red);color:var(--white);
   font-size:8px;letter-spacing:2px;padding:3px 8px;font-weight:600;
 }
-.plan-dur{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.plan-price{font-family:var(--font-d);font-size:58px;line-height:1;color:var(--white)}
-.plan-price sup{font-size:22px;vertical-align:top;margin-top:12px;color:var(--muted)}
-.plan-mo{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:6px}
-.plan-sep{width:28px;height:1px;background:var(--border);margin:24px 0}
+.plan-dur{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.plan-price{font-family:var(--font-d);font-size:52px;line-height:1;color:var(--white)}
+.plan-price sup{font-size:20px;vertical-align:top;margin-top:10px;color:var(--muted)}
+.plan-mo{font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:4px}
+.plan-sep{width:24px;height:1px;background:var(--border);margin:20px 0}
 .plan-feats{list-style:none}
-.plan-feats li{font-size:12px;color:var(--muted);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:8px}
+.plan-feats li{font-size:12px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:8px}
 .plan-feats li::before{content:'—';color:var(--red);font-size:10px}
 .plan-feats li.yes::before{content:'✓';color:var(--red)}
 .plan-cta{
   display:block;text-align:center;
   background:transparent;border:1px solid var(--border);
-  color:var(--muted);padding:11px;font-size:11px;letter-spacing:2px;
-  text-transform:uppercase;text-decoration:none;margin-top:28px;
+  color:var(--muted);padding:12px;font-size:11px;letter-spacing:2px;
+  text-transform:uppercase;text-decoration:none;margin-top:24px;
   transition:all .25s;
 }
-.plan-card:hover .plan-cta,.plan-card.hot .plan-cta{
-  background:var(--red);border-color:var(--red);color:var(--white);
-}
+.plan-card.hot .plan-cta{background:var(--red);border-color:var(--red);color:var(--white)}
+
+/* Scroll indicator dots */
+.scroll-dots{display:flex;gap:6px;justify-content:center;margin-top:16px}
+.scroll-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background .2s}
+.scroll-dot.active{background:var(--red)}
+
 .trainer-note{
-  margin-top:40px;padding:28px 32px;
+  margin-top:28px;padding:20px;
   background:var(--card);border:1px solid var(--border);
   border-left:3px solid var(--yellow);
-  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
 }
-.trainer-note-icon{font-size:32px}
-.trainer-note-text{flex:1}
-.trainer-note-text strong{font-family:var(--font-d);font-size:22px;letter-spacing:2px;color:var(--yellow);display:block;margin-bottom:4px}
-.trainer-note-text span{font-size:13px;color:var(--muted)}
+.trainer-note-icon{font-size:28px;margin-bottom:10px}
+.trainer-note-text strong{font-family:var(--font-d);font-size:20px;letter-spacing:2px;color:var(--yellow);display:block;margin-bottom:4px}
+.trainer-note-text span{font-size:12px;color:var(--muted);display:block;margin-bottom:16px}
 
-/* ─── TRAINER SECTION ─── */
+/* ─── TRAINER ─── */
 .trainer{background:var(--bg);overflow:hidden}
-.trainer-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
-.trainer-img{position:relative;overflow:hidden;min-height:600px}
-.trainer-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.trainer-img{position:relative;overflow:hidden;height:320px}
+.trainer-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .trainer-img::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(to right,transparent 60%,var(--bg));
+  background:linear-gradient(to bottom,transparent 60%,var(--bg));
 }
-.trainer-content{
-  background:var(--bg);padding:80px 60px;
-  display:flex;flex-direction:column;justify-content:center;
-}
-.trainer-content .s-title{margin-bottom:24px}
-.trainer-name{font-family:var(--font-d);font-size:48px;letter-spacing:3px;color:var(--red);line-height:1;margin-bottom:4px}
-.trainer-role{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
-.trainer-bio{font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:36px}
+.trainer-content{padding:28px 20px 0}
+.trainer-name{font-family:var(--font-d);font-size:38px;letter-spacing:3px;color:var(--red);line-height:1;margin-bottom:4px}
+.trainer-role{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.trainer-bio{font-size:14px;line-height:1.85;color:var(--muted);margin-bottom:28px}
 .trainer-contact{
-  display:inline-flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:12px;
   background:var(--card);border:1px solid var(--border);
-  padding:16px 24px;text-decoration:none;transition:border-color .2s;
+  padding:14px 18px;text-decoration:none;
 }
-.trainer-contact:hover{border-color:var(--red)}
 .trainer-contact-icon{
   background:#25D366;border-radius:50%;
   width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .trainer-contact-icon svg{width:20px;height:20px;fill:white}
 .trainer-contact-text strong{display:block;font-size:14px;font-weight:500;color:var(--white)}
-.trainer-contact-text small{font-size:11px;color:var(--muted);letter-spacing:1px}
+.trainer-contact-text small{font-size:10px;color:var(--muted);letter-spacing:1px}
+
+/* ─── REELS ─── */
+.reels{background:var(--bg);padding:64px 0 0}
+.reels-header{padding:0 20px 28px}
+.reels-insta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+  padding:13px 20px;text-decoration:none;color:white;
+  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  margin-top:20px;display:flex;width:fit-content;
+  min-height:44px;
+}
+
+/* Reel carousel */
+.reel-carousel{
+  position:relative;overflow:hidden;
+}
+.reel-track{
+  display:flex;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.reel-slide{
+  flex:0 0 100%;
+  padding:0 20px;
+}
+.reel-slide blockquote{
+  background:#FFF!important;
+  border:0!important;border-radius:3px!important;
+  box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15)!important;
+  margin:0!important;max-width:100%!important;min-width:0!important;
+  padding:0!important;width:100%!important;
+}
+.reel-nav{
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;padding:20px 20px 0;
+}
+.reel-btn{
+  width:44px;height:44px;border:1px solid var(--border);
+  background:var(--card);color:var(--white);
+  font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s;flex-shrink:0;
+}
+.reel-btn:active{border-color:var(--red)}
+.reel-counter{font-family:var(--font-d);font-size:20px;color:var(--muted);letter-spacing:2px;min-width:50px;text-align:center}
+.reel-counter span{color:var(--white)}
 
 /* ─── LOCATION ─── */
 .location{background:var(--bg2)}
-.location-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.location-info .s-title{margin-bottom:28px}
-.loc-detail{display:flex;gap:16px;align-items:flex-start;margin-bottom:24px}
+.location-inner{display:flex;flex-direction:column;gap:32px}
+.location-info .s-title{margin-bottom:20px}
+.loc-detail{display:flex;gap:12px;align-items:flex-start;margin-bottom:20px}
 .loc-icon{
-  width:40px;height:40px;border:1px solid var(--border);
+  width:38px;height:38px;border:1px solid var(--border);
   display:flex;align-items:center;justify-content:center;
-  font-size:16px;flex-shrink:0;
+  font-size:14px;flex-shrink:0;
 }
-.loc-text strong{display:block;font-size:13px;font-weight:500;color:var(--white);letter-spacing:1px;margin-bottom:4px}
-.loc-text span{font-size:13px;color:var(--muted);line-height:1.6}
+.loc-text strong{display:block;font-size:12px;font-weight:500;color:var(--white);letter-spacing:1px;margin-bottom:3px}
+.loc-text span{font-size:12px;color:var(--muted);line-height:1.6}
 .map-embed{
   border:1px solid var(--border);overflow:hidden;
-  height:380px;position:relative;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--card);
+  height:260px;
 }
-.map-embed iframe{width:100%;height:100%;border:none;filter:grayscale(80%) invert(10%)}
-.map-placeholder{text-align:center;padding:40px}
-.map-placeholder a{
-  display:inline-block;margin-top:16px;
-  background:var(--red);color:var(--white);
-  padding:12px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;
-}
+.map-embed iframe{width:100%;height:100%;border:none;filter:grayscale(60%) contrast(1.1)}
+.loc-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
 
 /* ─── FOOTER ─── */
 footer{
   background:var(--bg);border-top:1px solid var(--border);
-  padding:60px 60px 30px;
+  padding:48px 20px calc(20px + var(--safe-bottom));
 }
-.footer-inner{max-width:1240px;margin:0 auto}
-.footer-top{display:flex;gap:80px;justify-content:space-between;flex-wrap:wrap;margin-bottom:50px}
-.footer-brand img{height:48px;margin-bottom:12px}
-.footer-brand p{font-size:12px;color:var(--muted);line-height:1.8;max-width:240px;margin-top:8px}
-.footer-col h4{font-family:var(--font-d);font-size:18px;letter-spacing:2px;color:var(--white);margin-bottom:18px}
+.footer-brand img{height:40px;margin-bottom:10px}
+.footer-brand p{font-size:12px;color:var(--muted);line-height:1.8;max-width:280px;margin-top:8px;margin-bottom:32px}
+.footer-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:32px}
+.footer-col h4{font-family:var(--font-d);font-size:16px;letter-spacing:2px;color:var(--white);margin-bottom:14px}
 .footer-col ul{list-style:none}
 .footer-col ul li{margin-bottom:10px}
-.footer-col ul li a{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s}
-.footer-col ul li a:hover{color:var(--red)}
+.footer-col ul li a{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px}
 .footer-bottom{
-  border-top:1px solid var(--border);padding-top:24px;
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  border-top:1px solid var(--border);padding-top:20px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
 }
-.footer-bottom p{font-size:11px;color:var(--muted);letter-spacing:1px}
-.footer-bottom .social{display:flex;gap:12px}
+.footer-bottom p{font-size:10px;color:var(--muted);letter-spacing:1px}
 .social a{
-  width:34px;height:34px;border:1px solid var(--border);
+  width:36px;height:36px;border:1px solid var(--border);
   display:flex;align-items:center;justify-content:center;
   font-size:14px;text-decoration:none;color:var(--muted);
-  transition:all .2s;
 }
-.social a:hover{border-color:var(--red);color:var(--red)}
 
 /* ─── FLOATING WA ─── */
 .wa-float{
-  position:fixed;bottom:28px;right:28px;z-index:300;
-  background:#25D366;width:58px;height:58px;border-radius:50%;
+  position:fixed;bottom:calc(24px + var(--safe-bottom));right:20px;z-index:300;
+  background:#25D366;width:56px;height:56px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   text-decoration:none;
   box-shadow:0 4px 20px rgba(37,211,102,.4);
   animation:pulse 2.5s ease-in-out infinite;
-  transition:transform .2s;
 }
-.wa-float:hover{transform:scale(1.1)}
-.wa-float svg{width:28px;height:28px;fill:white}
+.wa-float svg{width:26px;height:26px;fill:white}
 @keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)}50%{box-shadow:0 4px 32px rgba(37,211,102,.7)}}
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-  nav{padding:0 24px}
-  .nav-links,.nav-cta{display:none}
-  .hamburger{display:flex}
-  section{padding:70px 24px}
-  .hero{padding:0 24px 60px}
-  .hero-stats{display:none}
-  .hero-badge{top:80px;right:24px}
-  .hero-title{font-size:clamp(58px,14vw,90px)}
-  .about-inner,.trainer-inner,.location-inner{grid-template-columns:1fr;gap:40px}
-  .about-imgs .img-main img{height:240px}
-  .about-imgs .img-sm img{height:150px}
-  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:4px}
-  .g-item:nth-child(n){grid-column:auto;grid-row:auto}
-  .plans-grid{grid-template-columns:1fr 1fr;gap:4px}
-  .trainer-img{min-height:380px}
-  .trainer-content{padding:48px 24px}
-  .gallery-hdr{flex-direction:column;align-items:flex-start;gap:16px}
-  footer{padding:48px 24px 24px}
-  .footer-top{gap:40px}
-  .map-embed{height:280px}
-}
-@media(max-width:580px){
-  .plans-grid{grid-template-columns:1fr}
-  .hero-actions{flex-direction:column;align-items:flex-start}
+/* ─── DESKTOP OVERRIDES ─── */
+@media(min-width:768px){
+  nav{padding:0 40px;height:68px}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--white)}
+  .nav-cta-desk{
+    display:block;
+    background:var(--red);color:var(--white);
+    padding:10px 24px;font-size:11px;font-weight:600;
+    letter-spacing:2px;text-transform:uppercase;text-decoration:none;
+    clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  }
+  .hamburger{display:none}
+  section{padding:110px 60px}
+  .about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .about-imgs .img-main img{height:300px}
+  .about-imgs .img-sm img{height:170px}
+  .gallery-grid{grid-template-columns:repeat(12,1fr);grid-template-rows:280px 240px}
+  .g-item:nth-child(1){grid-column:1/6;grid-row:1}
+  .g-item:nth-child(2){grid-column:6/9;grid-row:1}
+  .g-item:nth-child(3){grid-column:9/13;grid-row:1}
+  .g-item:nth-child(4){grid-column:1/5;grid-row:2}
+  .g-item:nth-child(5){grid-column:5/9;grid-row:2}
+  .g-item:nth-child(6){grid-column:9/13;grid-row:2}
+  .g-item{aspect-ratio:unset}
+  .plans-scroll{flex-wrap:nowrap;overflow-x:auto}
+  .plan-card{flex:0 0 280px}
+  .trainer{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+  .trainer-img{height:auto}
+  .trainer-content{padding:60px 48px;display:flex;flex-direction:column;justify-content:center}
+  .location-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .map-embed{height:360px}
+  .reels{padding:80px 0 0}
+  .reel-slide{padding:0 60px}
+  .reels-header{padding:0 60px 32px}
+  .reel-nav{padding:24px 60px 0}
 }
 </style>
 </head>
@@ -430,6 +451,10 @@ footer{
 <nav id="mainNav">
   <div class="nav-logo">
     <img src="logo.png" alt="Prime Fitness Logo"/>
+    <div class="nav-wordmark">
+      <strong>PRIME</strong>
+      <small>FITNESS · MALEGAON</small>
+    </div>
   </div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -439,7 +464,7 @@ footer{
     <li><a href="#trainer">Trainer</a></li>
     <li><a href="#location">Location</a></li>
   </ul>
-  <a href="https://wa.me/918459236002" target="_blank" class="nav-cta">Join Now</a>
+  <a href="https://wa.me/918459236002" target="_blank" class="nav-cta-desk">Join Now</a>
   <button class="hamburger" id="menuBtn" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -461,31 +486,31 @@ footer{
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
-  <div class="hero-badge">NOW OPEN — MALEGAON</div>
+  <div class="hero-badge">NOW OPEN</div>
   <div class="hero-content">
     <div class="hero-tag">Become The Prime Version</div>
     <h1 class="hero-title">
       PRIME<br>
       <span class="stroke">FIT</span><span class="accent">NESS</span>
     </h1>
-    <p class="hero-tagline">★ Become the best version of you — the prime version</p>
+    <p class="hero-tagline">★ Malegaon's most modern gym</p>
     <div class="hero-actions">
       <a href="#plans" class="btn-red">View Plans</a>
       <a href="#gallery" class="btn-ghost">Explore Gym</a>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div class="h-stat">
-      <div class="h-stat-num">50+</div>
-      <div class="h-stat-lbl">Machines</div>
-    </div>
-    <div class="h-stat">
-      <div class="h-stat-num">AC</div>
-      <div class="h-stat-lbl">Facility</div>
-    </div>
-    <div class="h-stat">
-      <div class="h-stat-num">₹999</div>
-      <div class="h-stat-lbl">From / Month</div>
+    <div class="hero-stats">
+      <div class="h-stat">
+        <div class="h-stat-num">50+</div>
+        <div class="h-stat-lbl">Machines</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">AC</div>
+        <div class="h-stat-lbl">Facility</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">₹999</div>
+        <div class="h-stat-lbl">From/Month</div>
+      </div>
     </div>
   </div>
   <div class="hero-strip"></div>
@@ -494,7 +519,6 @@ footer{
 <!-- ── MARQUEE ── -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <!-- doubled for seamless loop -->
     <span class="marquee-item">STRENGTH TRAINING</span>
     <span class="marquee-item">CARDIO ZONE</span>
     <span class="marquee-item">PERSONAL TRAINING</span>
@@ -514,15 +538,12 @@ footer{
 <section class="about" id="about">
   <div class="about-inner">
     <div class="about-imgs">
-      <!-- MAIN: wide gym interior shot — best overview -->
       <div class="img-frame img-main">
         <img src="gym-opening.jpg" alt="Prime Fitness Gym Interior"/>
       </div>
-      <!-- SM LEFT: people working out -->
       <div class="img-frame img-sm">
         <img src="gym-members.jpg" alt="Gym Members Training"/>
       </div>
-      <!-- SM RIGHT: equipment detail -->
       <div class="img-frame img-sm">
         <img src="gym-equipment.jpg" alt="Equipment Close Up"/>
       </div>
@@ -530,273 +551,257 @@ footer{
     <div class="about-text">
       <div class="s-label">Who We Are</div>
       <h2 class="s-title">YOUR<br>PRIME<br>ZONE</h2>
-      <p class="s-body">Prime Fitness is Malegaon's newest and most modern gym, built for those who refuse to settle for average. Every machine, every mirror, every square foot is designed to push you further.</p>
-      <p class="s-body" style="margin-top:14px">Whether you're a beginner stepping onto the gym floor for the first time or a seasoned lifter chasing new PRs — you belong here.</p>
+      <p class="s-body">Prime Fitness is Malegaon's newest and most modern gym, built for those who refuse to settle for average.</p>
+      <p class="s-body" style="margin-top:10px">Whether you're a beginner or a seasoned lifter — you belong here.</p>
       <div class="about-pills">
         <span class="pill">Air Conditioned</span>
         <span class="pill">Premium Machines</span>
-        <span class="pill">Large Free Weights Area</span>
+        <span class="pill">Free Weights</span>
         <span class="pill">Cardio Zone</span>
         <span class="pill">Expert Trainers</span>
         <span class="pill">Full-Wall Mirrors</span>
       </div>
-      <div style="margin-top:36px">
-        <a href="https://wa.me/918459236002" target="_blank" class="btn-red">Start Today →</a>
+      <div style="margin-top:28px">
+        <a href="https://wa.me/918459236002" target="_blank" class="btn-red" style="clip-path:none;border-radius:2px;width:fit-content;padding:14px 32px">Start Today →</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── GALLERY ── -->
-<section class="gallery" id="gallery" style="padding-bottom:0">
+<section class="gallery" id="gallery">
   <div class="gallery-hdr">
-    <div>
-      <div class="s-label">Inside Prime Fitness</div>
-      <h2 class="s-title" style="font-size:clamp(40px,6vw,72px)">THE<br>FLOOR</h2>
-    </div>
-    <a href="https://wa.me/918459236002" target="_blank" class="btn-ghost" style="margin-bottom:8px">Book a Free Tour →</a>
+    <div class="s-label">Inside Prime Fitness</div>
+    <h2 class="s-title" style="font-size:clamp(44px,12vw,72px)">THE<br>FLOOR</h2>
+    <a href="https://wa.me/918459236002" target="_blank" class="btn-ghost" style="width:fit-content;margin-top:16px;padding:12px 20px;font-size:10px">Book a Free Tour →</a>
   </div>
   <div class="gallery-grid">
-    <!-- Image 1: Gym wide/empty - best hero of the space -->
-    <div class="g-item">
-      <img src="gym-hero.jpg" alt="Gym Overview"/>
-      <div class="g-lbl">Main Floor</div>
-    </div>
-    <!-- Image 2: Gym with balloons portrait -->
-    <div class="g-item">
-      <img src="gym-members.jpg" alt="Gym Grand Opening"/>
-      <div class="g-lbl">Grand Opening</div>
-    </div>
-    <!-- Image 3: Trainer on machine -->
-    <div class="g-item">
-      <img src="gym-trainer.jpg" alt="Trainer on Machine"/>
-      <div class="g-lbl">Training Zone</div>
-    </div>
-    <!-- Image 4: Opening day with people -->
-    <div class="g-item">
-      <img src="gym-opening.jpg" alt="Opening Day"/>
-      <div class="g-lbl">Opening Day</div>
-    </div>
-    <!-- Image 5: Equipment close up -->
-    <div class="g-item">
-      <img src="gym-equipment.jpg" alt="Equipment Area"/>
-      <div class="g-lbl">Equipment</div>
-    </div>
-    <!-- Image 6: Members working out -->
-    <div class="g-item">
-      <img src="gym-floor.jpg" alt="Members"/>
-      <div class="g-lbl">Members</div>
-    </div>
+    <div class="g-item"><img src="gym-hero.jpg" alt="Gym Overview"/><div class="g-lbl">Main Floor</div></div>
+    <div class="g-item"><img src="gym-members.jpg" alt="Grand Opening"/><div class="g-lbl">Grand Opening</div></div>
+    <div class="g-item"><img src="gym-trainer.jpg" alt="Training Zone"/><div class="g-lbl">Training Zone</div></div>
+    <div class="g-item"><img src="gym-opening.jpg" alt="Opening Day"/><div class="g-lbl">Opening Day</div></div>
+    <div class="g-item"><img src="gym-equipment.jpg" alt="Equipment"/><div class="g-lbl">Equipment</div></div>
+    <div class="g-item"><img src="gym-floor.jpg" alt="Members"/><div class="g-lbl">Members</div></div>
   </div>
 </section>
-<!-- ── INSTAGRAM REELS ── -->
-<section style="background:var(--bg);padding:80px 60px" id="reels">
-  <div style="max-width:1240px;margin:0 auto">
 
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px">
-      <div>
-        <div class="s-label">Follow Our Journey</div>
-        <h2 class="s-title" style="font-size:clamp(40px,6vw,72px)">REELS &amp;<br>UPDATES</h2>
-        <p style="font-size:13px;color:var(--muted);margin-top:12px">Follow <strong style="color:var(--white)">@prime_fitness_41</strong> for workouts, tips &amp; transformations.</p>
+<!-- ── REELS ── -->
+<section class="reels" id="reels">
+  <div class="reels-header">
+    <div class="s-label">Follow Our Journey</div>
+    <h2 class="s-title" style="font-size:clamp(44px,12vw,72px)">REELS &amp;<br>UPDATES</h2>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px">Follow <strong style="color:var(--white)">@prime_fitness_41</strong> for workouts, tips &amp; transformations.</p>
+    <a href="https://www.instagram.com/prime_fitness_41" target="_blank" class="reels-insta-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Follow on Instagram
+    </a>
+  </div>
+
+  <!-- Reel Carousel -->
+  <div class="reel-carousel" id="reelCarousel">
+    <div class="reel-track" id="reelTrack">
+      <div class="reel-slide">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;align-items:center"><div style="background:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1"><div style="background:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px"></div><div style="background:#F4F4F4;border-radius:4px;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center"><a href="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by It's_your_prime (@prime_fitness41)</a></p></div></blockquote>
       </div>
-      <a href="https://www.instagram.com/prime_fitness_41" target="_blank"
-         style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);padding:14px 28px;text-decoration:none;color:white;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);flex-shrink:0">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        Follow on Instagram
-      </a>
+      <div class="reel-slide">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;align-items:center"><div style="background:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1"><div style="background:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px"></div><div style="background:#F4F4F4;border-radius:4px;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center"><a href="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by Pruthviraj Chavan (@pruthviraj__chavan_9489)</a></p></div></blockquote>
+      </div>
+      <div class="reel-slide">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;align-items:center"><div style="background:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1"><div style="background:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px"></div><div style="background:#F4F4F4;border-radius:4px;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center"><a href="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by Pruthviraj Chavan (@pruthviraj__chavan_9489)</a></p></div></blockquote>
+      </div>
     </div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
-
-      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFFFFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;flex-direction:row;align-items:center"><div style="background-color:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center"><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;margin-bottom:6px;width:100px"></div><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="https://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap"><a href="https://www.instagram.com/reel/DWDXKvOEl9q/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by It's_your_prime (@prime_fitness41)</a></p></div></blockquote>
-
-      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFFFFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;flex-direction:row;align-items:center"><div style="background-color:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center"><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;margin-bottom:6px;width:100px"></div><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="https://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap"><a href="https://www.instagram.com/reel/DT4IWccCslK/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by Pruthviraj Chavan (@pruthviraj__chavan_9489)</a></p></div></blockquote>
-
-      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:100%;min-width:0;padding:0;width:100%"><div style="padding:16px"><a href="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFFFFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%" target="_blank"><div style="display:flex;flex-direction:row;align-items:center"><div style="background-color:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center"><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;margin-bottom:6px;width:100px"></div><div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;width:60px"></div></div></div><div style="padding:19% 0"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="https://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><div style="padding-top:8px"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:550;line-height:18px">View this post on Instagram</div></div><div style="padding:12.5% 0"></div></a><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap"><a href="https://www.instagram.com/reel/DVU6iG1DOij/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none" target="_blank">A post shared by Pruthviraj Chavan (@pruthviraj__chavan_9489)</a></p></div></blockquote>
-
-    </div>
-
-    <script async src="//www.instagram.com/embed.js"></script>
-
-    <div style="margin-top:24px;text-align:center">
-      <a href="https://www.instagram.com/prime_fitness_41" target="_blank" class="btn-ghost">View All Reels on Instagram →</a>
-    </div>
-
   </div>
+
+  <!-- Navigation -->
+  <div class="reel-nav">
+    <button class="reel-btn" id="reelPrev">←</button>
+    <div class="reel-counter"><span id="reelCurrent">1</span> / 3</div>
+    <button class="reel-btn" id="reelNext">→</button>
+  </div>
+
+  <div style="padding:20px 20px 64px;text-align:center">
+    <a href="https://www.instagram.com/prime_fitness_41" target="_blank" class="btn-ghost" style="width:fit-content;margin:0 auto;display:flex">View All on Instagram →</a>
+  </div>
+
+  <script async src="//www.instagram.com/embed.js"></script>
 </section>
+
 <!-- ── PLANS ── -->
 <section class="plans" id="plans">
-  <div class="plans-inner">
-    <div class="plans-hdr">
-      <div>
-        <div class="s-label">Membership Pricing</div>
-        <h2 class="s-title">JOIN<br>TODAY</h2>
+  <div class="plans-hdr">
+    <div class="s-label">Membership Pricing</div>
+    <h2 class="s-title">JOIN<br>TODAY</h2>
+    <p class="plans-note">Flexible plans for every goal. No hidden fees.</p>
+  </div>
+
+  <div class="plan-tabs">
+    <button class="plan-tab active" onclick="switchPlan('gym',this)">Gym Only</button>
+    <button class="plan-tab" onclick="switchPlan('cardio',this)">Gym + Cardio</button>
+  </div>
+
+  <!-- GYM ONLY -->
+  <div class="plans-block active" id="block-gym">
+    <div class="plans-scroll" id="gymScroll">
+      <div class="plan-card">
+        <div class="plan-dur">1 Month</div>
+        <div class="plan-price"><sup>₹</sup>999</div>
+        <div class="plan-mo">per month</div>
+        <div class="plan-sep"></div>
+        <ul class="plan-feats">
+          <li class="yes">Full Gym Access</li>
+          <li class="yes">Expert Guidance</li>
+          <li class="yes">AC Facility</li>
+          <li>Cardio Machines</li>
+        </ul>
+        <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+1+Month+Gym+plan+%E2%82%B9999" target="_blank" class="plan-cta">Get Started</a>
       </div>
-      <p class="plans-note">Flexible membership plans built for every goal. No hidden fees. Cancel anytime.</p>
-    </div>
-
-    <!-- Tab switcher -->
-    <div class="plan-tabs">
-      <button class="plan-tab active" onclick="switchPlan('gym',this)">Gym Only</button>
-      <button class="plan-tab" onclick="switchPlan('cardio',this)">Gym + Cardio</button>
-    </div>
-
-    <!-- GYM ONLY -->
-    <div class="plans-block active" id="block-gym">
-      <div class="plans-grid">
-        <div class="plan-card">
-          <div class="plan-dur">1 Month</div>
-          <div class="plan-price"><sup>₹</sup>999</div>
-          <div class="plan-mo">per month</div>
-          <div class="plan-sep"></div>
-          <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li>
-            <li class="yes">Expert Guidance</li>
-            <li class="yes">AC Facility</li>
-            <li>Cardio Machines</li>
-          </ul>
-          <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+1+Month+Gym+plan+%E2%82%B9999" target="_blank" class="plan-cta">Get Started</a>
-        </div>
-        <div class="plan-card">
-          <div class="plan-dur">3 Months</div>
-          <div class="plan-price"><sup>₹</sup>2699</div>
-          <div class="plan-mo">₹900/month</div>
-          <div class="plan-sep"></div>
-          <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li>
-            <li class="yes">Expert Guidance</li>
-            <li class="yes">AC Facility</li>
-            <li>Cardio Machines</li>
-          </ul>
-          <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+3+Month+Gym+plan+%E2%82%B92699" target="_blank" class="plan-cta">Get Started</a>
-        </div>
-        <div class="plan-card hot">
-          <div class="hot-badge">BEST VALUE</div>
-          <div class="plan-dur">6 Months</div>
-          <div class="plan-price"><sup>₹</sup>5399</div>
-          <div class="plan-mo">₹900/month</div>
-          <div class="plan-sep"></div>
-          <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li>
-            <li class="yes">Expert Guidance</li>
-            <li class="yes">AC Facility</li>
-            <li class="yes">Diet Tips</li>
-          </ul>
-          <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+6+Month+Gym+plan+%E2%82%B95399" target="_blank" class="plan-cta">Get Started</a>
-        </div>
-        <div class="plan-card">
-          <div class="plan-dur">12 Months</div>
-          <div class="plan-price"><sup>₹</sup>10799</div>
-          <div class="plan-mo">₹900/month</div>
-          <div class="plan-sep"></div>
-          <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li>
-            <li class="yes">Expert Guidance</li>
-            <li class="yes">AC Facility</li>
-            <li class="yes">Diet Tips</li>
-            <li class="yes">Progress Tracking</li>
-          </ul>
-          <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+12+Month+Gym+plan+%E2%82%B910799" target="_blank" class="plan-cta">Get Started</a>
-        </div>
+      <div class="plan-card">
+        <div class="plan-dur">3 Months</div>
+        <div class="plan-price"><sup>₹</sup>2699</div>
+        <div class="plan-mo">₹900/month</div>
+        <div class="plan-sep"></div>
+        <ul class="plan-feats">
+          <li class="yes">Full Gym Access</li>
+          <li class="yes">Expert Guidance</li>
+          <li class="yes">AC Facility</li>
+          <li>Cardio Machines</li>
+        </ul>
+        <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+3+Month+Gym+plan+%E2%82%B92699" target="_blank" class="plan-cta">Get Started</a>
+      </div>
+      <div class="plan-card hot">
+        <div class="hot-badge">BEST VALUE</div>
+        <div class="plan-dur">6 Months</div>
+        <div class="plan-price"><sup>₹</sup>5399</div>
+        <div class="plan-mo">₹900/month</div>
+        <div class="plan-sep"></div>
+        <ul class="plan-feats">
+          <li class="yes">Full Gym Access</li>
+          <li class="yes">Expert Guidance</li>
+          <li class="yes">AC Facility</li>
+          <li class="yes">Diet Tips</li>
+        </ul>
+        <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+6+Month+Gym+plan+%E2%82%B95399" target="_blank" class="plan-cta">Get Started</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-dur">12 Months</div>
+        <div class="plan-price"><sup>₹</sup>10799</div>
+        <div class="plan-mo">₹900/month</div>
+        <div class="plan-sep"></div>
+        <ul class="plan-feats">
+          <li class="yes">Full Gym Access</li>
+          <li class="yes">Expert Guidance</li>
+          <li class="yes">AC Facility</li>
+          <li class="yes">Diet Tips</li>
+          <li class="yes">Progress Tracking</li>
+        </ul>
+        <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+12+Month+Gym+plan+%E2%82%B910799" target="_blank" class="plan-cta">Get Started</a>
       </div>
     </div>
+    <div class="scroll-dots" id="gymDots">
+      <div class="scroll-dot active"></div>
+      <div class="scroll-dot"></div>
+      <div class="scroll-dot"></div>
+      <div class="scroll-dot"></div>
+    </div>
+  </div>
 
-    <!-- GYM + CARDIO -->
-    <div class="plans-block" id="block-cardio">
-      <div class="plans-grid">
-        <div class="plan-card">
-          <div class="plan-dur">1 Month</div>
-          <div class="plan-price"><sup>₹</sup>1499</div>
-          <div class="plan-mo">per month</div>
-          <div class="plan-sep"></div>
-          <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li>
-            <li class="yes">All Cardio Machines</li>
-            <li class="yes">Expert Guidance</li>
-            <li class="yes">AC Facility</li>
-          </ul>
-          <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+1+Month+Gym%2BCardio+plan+%E2%82%B91499" target="_blank" class="plan-cta">Get Started</a>
-        </div>
-        <div class="plan-card">
-          <div class="plan-dur">3 Months</div>
-          <div class="plan-price"><sup>₹</sup>3899</div>
-          <div class="plan-mo">₹1300/month</div>
-          <div class="plan-sep"></div>
-          <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li>
-            <li class="yes">All Cardio Machines</li>
-            <li class="yes">Expert Guidance</li>
-            <li class="yes">AC Facility</li>
-          </ul>
-          <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+3+Month+Gym%2BCardio+plan+%E2%82%B93899" target="_blank" class="plan-cta">Get Started</a>
-        </div>
-        <div class="plan-card hot">
-          <div class="hot-badge">BEST VALUE</div>
-          <div class="plan-dur">6 Months</div>
-          <div class="plan-price"><sup>₹</sup>7799</div>
-          <div class="plan-mo">₹1300/month</div>
-          <div class="plan-sep"></div>
-          <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li>
-            <li class="yes">All Cardio Machines</li>
-            <li class="yes">Expert Guidance</li>
-            <li class="yes">AC Facility</li>
-            <li class="yes">Diet Tips</li>
-          </ul>
-          <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+6+Month+Gym%2BCardio+plan+%E2%82%B97799" target="_blank" class="plan-cta">Get Started</a>
-        </div>
-        <div class="plan-card">
-          <div class="plan-dur">12 Months</div>
-          <div class="plan-price"><sup>₹</sup>15599</div>
-          <div class="plan-mo">₹1300/month</div>
-          <div class="plan-sep"></div>
-          <ul class="plan-feats">
-            <li class="yes">Full Gym Access</li>
-            <li class="yes">All Cardio Machines</li>
-            <li class="yes">Expert Guidance</li>
-            <li class="yes">AC Facility</li>
-            <li class="yes">Diet Tips</li>
-            <li class="yes">Progress Tracking</li>
-          </ul>
-          <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+12+Month+Gym%2BCardio+plan+%E2%82%B915599" target="_blank" class="plan-cta">Get Started</a>
-        </div>
+  <!-- GYM + CARDIO -->
+  <div class="plans-block" id="block-cardio">
+    <div class="plans-scroll" id="cardioScroll">
+      <div class="plan-card">
+        <div class="plan-dur">1 Month</div>
+        <div class="plan-price"><sup>₹</sup>1499</div>
+        <div class="plan-mo">per month</div>
+        <div class="plan-sep"></div>
+        <ul class="plan-feats">
+          <li class="yes">Full Gym Access</li>
+          <li class="yes">All Cardio Machines</li>
+          <li class="yes">Expert Guidance</li>
+          <li class="yes">AC Facility</li>
+        </ul>
+        <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+1+Month+Gym%2BCardio+plan+%E2%82%B91499" target="_blank" class="plan-cta">Get Started</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-dur">3 Months</div>
+        <div class="plan-price"><sup>₹</sup>3899</div>
+        <div class="plan-mo">₹1300/month</div>
+        <div class="plan-sep"></div>
+        <ul class="plan-feats">
+          <li class="yes">Full Gym Access</li>
+          <li class="yes">All Cardio Machines</li>
+          <li class="yes">Expert Guidance</li>
+          <li class="yes">AC Facility</li>
+        </ul>
+        <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+3+Month+Gym%2BCardio+plan+%E2%82%B93899" target="_blank" class="plan-cta">Get Started</a>
+      </div>
+      <div class="plan-card hot">
+        <div class="hot-badge">BEST VALUE</div>
+        <div class="plan-dur">6 Months</div>
+        <div class="plan-price"><sup>₹</sup>7799</div>
+        <div class="plan-mo">₹1300/month</div>
+        <div class="plan-sep"></div>
+        <ul class="plan-feats">
+          <li class="yes">Full Gym Access</li>
+          <li class="yes">All Cardio Machines</li>
+          <li class="yes">Expert Guidance</li>
+          <li class="yes">AC Facility</li>
+          <li class="yes">Diet Tips</li>
+        </ul>
+        <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+6+Month+Gym%2BCardio+plan+%E2%82%B97799" target="_blank" class="plan-cta">Get Started</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-dur">12 Months</div>
+        <div class="plan-price"><sup>₹</sup>15599</div>
+        <div class="plan-mo">₹1300/month</div>
+        <div class="plan-sep"></div>
+        <ul class="plan-feats">
+          <li class="yes">Full Gym Access</li>
+          <li class="yes">All Cardio Machines</li>
+          <li class="yes">Expert Guidance</li>
+          <li class="yes">AC Facility</li>
+          <li class="yes">Diet Tips</li>
+          <li class="yes">Progress Tracking</li>
+        </ul>
+        <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+12+Month+Gym%2BCardio+plan+%E2%82%B915599" target="_blank" class="plan-cta">Get Started</a>
       </div>
     </div>
+    <div class="scroll-dots" id="cardioDots">
+      <div class="scroll-dot active"></div>
+      <div class="scroll-dot"></div>
+      <div class="scroll-dot"></div>
+      <div class="scroll-dot"></div>
+    </div>
+  </div>
 
-    <!-- Personal Trainer note -->
-    <div class="trainer-note">
-      <div class="trainer-note-icon">💪</div>
-      <div class="trainer-note-text">
-        <strong>Personal Training Available</strong>
-        <span>Work 1-on-1 with our certified trainer for faster, targeted results. Contact us for PT pricing.</span>
-      </div>
-      <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+Personal+Training" target="_blank" class="btn-red" style="flex-shrink:0">Ask About PT</a>
+  <div class="trainer-note">
+    <div class="trainer-note-icon">💪</div>
+    <div class="trainer-note-text">
+      <strong>Personal Training Available</strong>
+      <span>Work 1-on-1 with our certified trainer for faster results. Contact us for PT pricing.</span>
+      <a href="https://wa.me/918459236002?text=Hi%2C+I'm+interested+in+Personal+Training" target="_blank" class="btn-red" style="clip-path:none;border-radius:2px;padding:13px 28px;width:fit-content;display:inline-flex">Ask About PT</a>
     </div>
   </div>
 </section>
 
 <!-- ── TRAINER ── -->
-<section class="trainer" id="trainer">
-  <div class="trainer-inner">
-    <!-- Trainer working out on machine -->
-    <div class="trainer-img">
-      <img src="gym-trainer.jpg" alt="Pruthviraj Chavan - Trainer"/>
-    </div>
-    <div class="trainer-content">
-      <div class="s-label">Meet Your Trainer</div>
-      <div class="trainer-name">PRUTHVIRAJ<br>M. CHAVAN</div>
-      <div class="trainer-role">Founder & Head Trainer — Prime Fitness</div>
-      <p class="trainer-bio">Pruthviraj built Prime Fitness with a single mission: to bring a world-class gym experience to Malegaon. With hands-on expertise in strength training, body composition, and personalised fitness planning — he's here to help you hit every goal.</p>
-      <a href="https://wa.me/918459236002" target="_blank" class="trainer-contact">
-        <div class="trainer-contact-icon">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.546 4.078 1.502 5.789L0 24l6.362-1.483A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.66-.488-5.204-1.344l-.373-.219-3.777.882.925-3.671-.241-.39A9.969 9.969 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        </div>
-        <div class="trainer-contact-text">
-          <strong>+91 84592 36002</strong>
-          <small>Chat on WhatsApp</small>
-        </div>
-      </a>
-    </div>
+<section class="trainer" id="trainer" style="padding:0">
+  <div class="trainer-img">
+    <img src="gym-trainer.jpg" alt="Pruthviraj Chavan - Trainer"/>
+  </div>
+  <div class="trainer-content" style="padding:32px 20px 64px">
+    <div class="s-label">Meet Your Trainer</div>
+    <div class="trainer-name">PRUTHVIRAJ<br>M. CHAVAN</div>
+    <div class="trainer-role">Founder & Head Trainer — Prime Fitness</div>
+    <p class="trainer-bio">Pruthviraj built Prime Fitness with a single mission: to bring a world-class gym experience to Malegaon. With hands-on expertise in strength training, body composition, and personalised fitness planning — he's here to help you hit every goal.</p>
+    <a href="https://wa.me/918459236002" target="_blank" class="trainer-contact">
+      <div class="trainer-contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.546 4.078 1.502 5.789L0 24l6.362-1.483A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.66-.488-5.204-1.344l-.373-.219-3.777.882.925-3.671-.241-.39A9.969 9.969 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      </div>
+      <div class="trainer-contact-text">
+        <strong>+91 84592 36002</strong>
+        <small>Chat on WhatsApp</small>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -806,12 +811,12 @@ footer{
     <div class="location-info">
       <div class="s-label">Find Us</div>
       <h2 class="s-title">VISIT<br>US</h2>
-      <div style="margin-top:32px">
+      <div style="margin-top:24px">
         <div class="loc-detail">
           <div class="loc-icon">📍</div>
           <div class="loc-text">
             <strong>Address</strong>
-            <span>Gilankar Nagar, infront of M.S.G College,<br>besides Kabra Book Store & Swapna Purti Classes,<br>Malegaon</span>
+            <span>Gilankar Nagar, infront of M.S.G College,<br>besides Kabra Book Store,<br>Malegaon</span>
           </div>
         </div>
         <div class="loc-detail">
@@ -825,78 +830,64 @@ footer{
           <div class="loc-icon">🕐</div>
           <div class="loc-text">
             <strong>Timings</strong>
-            <span>Monday – Saturday: 6:00 AM – 10:00 PM<br>Sunday: 7:00 AM – 12:00 PM</span>
+            <span>Mon–Sat: 6:00 AM – 10:00 PM<br>Sunday: 7:00 AM – 12:00 PM</span>
           </div>
         </div>
       </div>
-      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
-        <a href="https://wa.me/918459236002" target="_blank" class="btn-red">WhatsApp Us</a>
-        <a href="https://maps.google.com/?q=HG58%2BQG+Malegaon+Maharashtra" target="_blank" class="btn-ghost">Get Directions</a>
+      <div class="loc-btns">
+        <a href="https://wa.me/918459236002" target="_blank" class="btn-red" style="clip-path:none;border-radius:2px">WhatsApp Us</a>
+        <a href="https://maps.google.com/?q=HG58%2BQG+Malegaon+Maharashtra" target="_blank" class="btn-ghost">Directions</a>
       </div>
     </div>
     <div class="map-embed">
-      <iframe
-        src="https://maps.google.com/maps?q=HG58%2BQG+Malegaon+Maharashtra&output=embed&z=18"
-        width="100%" height="100%"
-        style="border:0;filter:grayscale(60%) contrast(1.1);"
-        allowfullscreen="" loading="lazy">
-      </iframe>
+      <iframe src="https://maps.google.com/maps?q=HG58%2BQG+Malegaon+Maharashtra&output=embed&z=18" width="100%" height="100%" style="border:0;filter:grayscale(60%) contrast(1.1);" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </div>
 </section>
 
 <!-- ── FOOTER ── -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <img src="logo.png" alt="Prime Fitness"/>
-        <p>Become the best version of you — the prime version. Malegaon's most modern gym.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#plans">Pricing</a></li>
-          <li><a href="#trainer">Trainer</a></li>
-          <li><a href="#location">Location</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Plans</h4>
-        <ul>
-          <li><a href="#plans">1 Month — ₹999</a></li>
-          <li><a href="#plans">3 Months — ₹2,699</a></li>
-          <li><a href="#plans">6 Months — ₹5,399</a></li>
-          <li><a href="#plans">12 Months — ₹10,799</a></li>
-          <li><a href="#plans">Gym + Cardio Plans</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="https://wa.me/918459236002" target="_blank">+91 84592 36002</a></li>
-          <li><a href="#location">Gilankar Nagar, Malegaon</a></li>
-        </ul>
-      </div>
+  <div class="footer-brand">
+    <img src="logo.png" alt="Prime Fitness"/>
+    <p>Become the best version of you — the prime version. Malegaon's most modern gym.</p>
+  </div>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#plans">Pricing</a></li>
+        <li><a href="#trainer">Trainer</a></li>
+        <li><a href="#location">Location</a></li>
+      </ul>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 Prime Fitness, Malegaon. All rights reserved.</p>
-      <div class="social">
-        <a href="https://wa.me/918459236002" target="_blank" title="WhatsApp">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.546 4.078 1.502 5.789L0 24l6.362-1.483A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.66-.488-5.204-1.344l-.373-.219-3.777.882.925-3.671-.241-.39A9.969 9.969 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        </a>
-      </div>
+    <div class="footer-col">
+      <h4>Plans</h4>
+      <ul>
+        <li><a href="#plans">1 Month — ₹999</a></li>
+        <li><a href="#plans">3 Months — ₹2,699</a></li>
+        <li><a href="#plans">6 Months — ₹5,399</a></li>
+        <li><a href="#plans">12 Months — ₹10,799</a></li>
+        <li><a href="#plans">+ Cardio Plans</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Prime Fitness, Malegaon</p>
+    <div class="social">
+      <a href="https://wa.me/918459236002" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.546 4.078 1.502 5.789L0 24l6.362-1.483A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.66-.488-5.204-1.344l-.373-.219-3.777.882.925-3.671-.241-.39A9.969 9.969 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      </a>
     </div>
   </div>
 </footer>
 
 <script>
-// Nav scroll effect
+// Nav scroll
 window.addEventListener('scroll',()=>{
-  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
+  document.getElementById('mainNav').style.background=window.scrollY>60?'rgba(10,10,10,0.99)':'rgba(10,10,10,0.97)';
 });
 
 // Mobile menu
@@ -911,15 +902,55 @@ function closeMobileMenu(){
 }
 
 // Plan tabs
-function switchPlan(type, btn){
+function switchPlan(type,btn){
   document.querySelectorAll('.plan-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.plans-block').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('block-'+type).classList.add('active');
 }
 
-// Scroll reveal (simple IntersectionObserver)
-const revealEls = document.querySelectorAll('.about-inner, .gallery-hdr, .g-item, .plan-card, .trainer-inner, .location-inner, .trainer-note');
+// Plan cards scroll dots
+function setupScrollDots(scrollId, dotsId){
+  const scroll = document.getElementById(scrollId);
+  const dots = document.getElementById(dotsId);
+  if(!scroll||!dots) return;
+  const allDots = dots.querySelectorAll('.scroll-dot');
+  scroll.addEventListener('scroll',()=>{
+    const idx = Math.round(scroll.scrollLeft / 272);
+    allDots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+  });
+  allDots.forEach((dot,i)=>{
+    dot.addEventListener('click',()=>scroll.scrollTo({left:i*272,behavior:'smooth'}));
+  });
+}
+setupScrollDots('gymScroll','gymDots');
+setupScrollDots('cardioScroll','cardioDots');
+
+// Reel carousel
+let reelIdx = 0;
+const totalReels = 3;
+const track = document.getElementById('reelTrack');
+const currentEl = document.getElementById('reelCurrent');
+
+function goReel(dir){
+  reelIdx = (reelIdx + dir + totalReels) % totalReels;
+  track.style.transform = 'translateX(-' + (reelIdx * 100) + '%)';
+  currentEl.textContent = reelIdx + 1;
+}
+document.getElementById('reelPrev').addEventListener('click',()=>goReel(-1));
+document.getElementById('reelNext').addEventListener('click',()=>goReel(1));
+
+// Touch swipe for reels
+let touchStartX = 0;
+const carousel = document.getElementById('reelCarousel');
+carousel.addEventListener('touchstart',e=>{ touchStartX = e.touches[0].clientX; },{passive:true});
+carousel.addEventListener('touchend',e=>{
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if(Math.abs(diff) > 50) goReel(diff > 0 ? 1 : -1);
+},{passive:true});
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.about-inner, .gallery-hdr, .g-item, .plan-card, .trainer-content, .location-inner, .trainer-note');
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -927,11 +958,11 @@ const observer = new IntersectionObserver((entries)=>{
       e.target.style.transform='translateY(0)';
     }
   });
-},{threshold:0.12});
+},{threshold:0.08});
 revealEls.forEach(el=>{
   el.style.opacity='0';
-  el.style.transform='translateY(28px)';
-  el.style.transition='opacity .6s ease, transform .6s ease';
+  el.style.transform='translateY(24px)';
+  el.style.transition='opacity .55s ease, transform .55s ease';
   observer.observe(el);
 });
 </script>
