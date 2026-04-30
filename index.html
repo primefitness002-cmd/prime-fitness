@@ -439,9 +439,9 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
       </div>
     </div>
     <div class="about-imgs">
-      <div class="img-frame img-main"><img src="gym-main.jpg" alt="Prime Fitness gym floor"/></div>
-      <div class="img-frame img-sm"><img src="gym-weights.jpg" alt="Free weights area"/></div>
-      <div class="img-frame img-sm"><img src="gym-cardio.jpg" alt="Cardio machines"/></div>
+      <div class="img-frame img-main"><img src="gym-floor.jpg" alt="Prime Fitness gym floor"/></div>
+      <div class="img-frame img-sm"><img src="gym-equipment.jpg" alt="Free weights area"/></div>
+      <div class="img-frame img-sm"><img src="gym-members.jpg" alt="Cardio machines"/></div>
     </div>
   </div>
 </section>
@@ -453,10 +453,10 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
   </div>
   <div class="gallery-grid">
     <div class="g-item"><img src="gym-floor.jpg" alt="Gym floor"/><div class="g-lbl">Main Gym Floor</div></div>
-    <div class="g-item"><img src="gym-weights.jpg" alt="Free weights"/><div class="g-lbl">Free Weights</div></div>
-    <div class="g-item"><img src="gym-cables.jpg" alt="Cable machines"/><div class="g-lbl">Cable Station</div></div>
-    <div class="g-item"><img src="gym-cardio.jpg" alt="Cardio zone"/><div class="g-lbl">Cardio Zone</div></div>
-    <div class="g-item"><img src="gym-smith.jpg" alt="Smith machine"/><div class="g-lbl">Smith Machine</div></div>
+    <div class="g-item"><img src="gym-equipment.jpg" alt="Free weights"/><div class="g-lbl">Free Weights</div></div>
+    <div class="g-item"><img src="gym-equipment.jpg" alt="Cable machines"/><div class="g-lbl">Cable Station</div></div>
+    <div class="g-item"><img src="gym-members.jpg" alt="Cardio zone"/><div class="g-lbl">Cardio Zone</div></div>
+    <div class="g-item"><img src="gym-opening.jpg" alt="Smith machine"/><div class="g-lbl">Smith Machine</div></div>
     <div class="g-item"><img src="gym-trainer.jpg" alt="Training session"/><div class="g-lbl">Training Sessions</div></div>
   </div>
 </section>
@@ -602,16 +602,14 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 <div id="admin-app" style="display:none;position:fixed;inset:0;z-index:800;background:#0a0a0a;overflow:hidden;flex-direction:column">
 
   <!-- TOPBAR -->
-  <div style="background:#111;border-bottom:1px solid #222;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:8px">
+  <div style="background:#111;border-bottom:1px solid #222;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:8px">
     <div style="display:flex;align-items:center;gap:10px">
-      <div id="page-title" style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px">Dashboard</div>
+      <div id="page-title" style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px">Dashboard</div>
       <span id="topbar-expiry" style="font-size:11px;color:#e8162a;display:none"></span>
     </div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <button onclick="openAddMember()" style="display:flex;align-items:center;gap:6px;background:#e8162a;border:none;color:#fff;padding:9px 16px;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Barlow',sans-serif">
-        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>Add Member
-      </button>
-    </div>
+    <button onclick="openAddMember()" style="display:flex;align-items:center;gap:6px;background:#f5c200;border:none;color:#111;padding:10px 18px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Barlow',sans-serif;border-radius:4px;white-space:nowrap">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>+ Add Member
+    </button>
   </div>
 
   <!-- LAYOUT -->
@@ -660,50 +658,50 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 
         <!-- DASHBOARD -->
         <div id="page-dashboard">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px" id="stats-grid">
-            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:18px">
-              <div style="font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px">Total Members</div>
-              <div id="stat-total" style="font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;color:#e8162a">0</div>
-              <div style="font-size:11px;color:#666;margin-top:3px">All time</div>
+          <div id="stats-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px">
+            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:16px">
+              <div style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Total Members</div>
+              <div id="stat-total" style="font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;color:#e8162a">0</div>
+              <div style="font-size:11px;color:#555;margin-top:4px">All time</div>
             </div>
-            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:18px">
-              <div style="font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px">Active</div>
-              <div id="stat-active" style="font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;color:#1db954">0</div>
-              <div style="font-size:11px;color:#666;margin-top:3px">Currently active</div>
+            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:16px">
+              <div style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Active</div>
+              <div id="stat-active" style="font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;color:#1db954">0</div>
+              <div style="font-size:11px;color:#555;margin-top:4px">Currently active</div>
             </div>
-            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:18px">
-              <div style="font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px">Expired/Inactive</div>
-              <div id="stat-inactive" style="font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;color:#e84040">0</div>
-              <div style="font-size:11px;color:#666;margin-top:3px">Need renewal</div>
+            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:16px">
+              <div style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Expired / Inactive</div>
+              <div id="stat-inactive" style="font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;color:#e84040">0</div>
+              <div style="font-size:11px;color:#555;margin-top:4px">Need renewal</div>
             </div>
-            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:18px">
-              <div style="font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px">Expiring Soon</div>
-              <div id="stat-expiring" style="font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;color:#3b82f6">0</div>
-              <div style="font-size:11px;color:#666;margin-top:3px">Within 5 days</div>
+            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:16px">
+              <div style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Expiring Soon</div>
+              <div id="stat-expiring" style="font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;color:#3b82f6">0</div>
+              <div style="font-size:11px;color:#555;margin-top:4px">Within 5 days</div>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
-            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:18px">
-              <div style="font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Cardio Members</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:16px">
+              <div style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Cardio Members</div>
               <div id="stat-cardio" style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#e8162a;line-height:1">0</div>
-              <div style="font-size:11px;color:#666;margin-top:3px">Active cardio plan</div>
+              <div style="font-size:11px;color:#555;margin-top:4px">Active cardio plan</div>
             </div>
-            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:18px">
-              <div style="font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Non-Cardio Members</div>
+            <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:16px">
+              <div style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Non-Cardio Members</div>
               <div id="stat-noncardio" style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#e8162a;line-height:1">0</div>
-              <div style="font-size:11px;color:#666;margin-top:3px">Active gym only</div>
+              <div style="font-size:11px;color:#555;margin-top:4px">Active gym only</div>
             </div>
           </div>
           <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:12px">Expiring This Week</div>
-          <div id="expiry-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px"><div style="color:#666;font-size:12px">No members expiring soon.</div></div>
+          <div id="expiry-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px"><div style="color:#666;font-size:12px">No members expiring soon.</div></div>
         </div>
 
         <!-- MEMBERS -->
         <div id="page-members" style="display:none">
           <div style="background:#161616;border:1px solid #222;border-radius:8px;overflow:hidden">
-            <div style="padding:14px 18px;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-              <input id="search-input" class="search-box" type="search" placeholder="Search name or phone..." oninput="renderTable()"/>
-              <div style="display:flex;gap:5px;flex-wrap:wrap">
+            <div style="padding:14px 16px;border-bottom:1px solid #222;display:flex;flex-direction:column;gap:10px">
+              <input id="search-input" class="search-box" type="search" placeholder="Search name or phone..." oninput="renderTable()" style="max-width:100%"/>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
                 <button class="f-btn active" onclick="setFilter('all',this)">All</button>
                 <button class="f-btn" onclick="setFilter('active',this)">Active</button>
                 <button class="f-btn" onclick="setFilter('inactive',this)">Inactive</button>
@@ -712,14 +710,9 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
               </div>
             </div>
             <div style="overflow-x:auto">
-              <table style="width:100%;border-collapse:collapse">
+              <table>
                 <thead><tr>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Name</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Plan</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Type</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Expires</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Status</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Actions</th>
+                  <th>Name</th><th>Plan</th><th>Type</th><th>Expires</th><th>Status</th><th>Actions</th>
                 </tr></thead>
                 <tbody id="members-tbody"></tbody>
               </table>
@@ -730,17 +723,13 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
         <!-- PAYMENTS -->
         <div id="page-payments" style="display:none">
           <div style="background:#161616;border:1px solid #222;border-radius:8px;overflow:hidden">
-            <div style="padding:14px 18px;border-bottom:1px solid #222">
+            <div style="padding:14px 16px;border-bottom:1px solid #222">
               <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px">All Payments</div>
             </div>
             <div style="overflow-x:auto">
-              <table style="width:100%;border-collapse:collapse">
+              <table>
                 <thead><tr>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Member</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Amount</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Plan</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Type</th>
-                  <th style="padding:11px 14px;text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:1px solid #222;font-weight:400">Date</th>
+                  <th>Member</th><th>Amount</th><th>Plan</th><th>Type</th><th>Date</th>
                 </tr></thead>
                 <tbody id="payments-tbody"></tbody>
               </table>
@@ -788,26 +777,31 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
   </div><!-- end layout -->
 
   <!-- MOBILE BOTTOM TABS -->
-  <div id="bottom-tabs" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:810;background:#111;border-top:1px solid #222;justify-content:space-around;padding:6px 0 8px">
-    <button class="tab-btn active" onclick="showPage('dashboard',this)">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>Home
+  <div id="bottom-tabs" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:810;background:#111;border-top:1px solid #222;justify-content:space-around;padding:4px 0 env(safe-area-inset-bottom,8px)">
+    <button class="tab-btn active" id="tab-home" onclick="showPage('dashboard',this)">
+      <svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Home
     </button>
-    <button class="tab-btn" onclick="showPage('members',this)">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>Members
+    <button class="tab-btn" id="tab-members" onclick="showPage('members',this)">
+      <svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+      Members
     </button>
-    <button onclick="openAddMember()" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 10px;background:none;border:none;color:#e8162a;font-family:'Barlow',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer">
-      <svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="7"/><line x1="8" y1="4" x2="8" y2="12"/><line x1="4" y1="8" x2="12" y2="8"/></svg>Add
+    <button class="tab-btn" onclick="openAddMember()" style="color:#f5c200">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="7"/><line x1="8" y1="4" x2="8" y2="12"/><line x1="4" y1="8" x2="12" y2="8"/></svg>
+      Add
     </button>
-    <button class="tab-btn" onclick="showPage('expiring',this)" style="position:relative">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+    <button class="tab-btn" id="tab-expiring" onclick="showPage('expiring',this)" style="position:relative">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
       Expiring
-      <span id="expiry-tab-badge" style="position:absolute;top:2px;right:4px;background:#e8162a;color:#fff;font-size:9px;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 3px">0</span>
+      <span id="expiry-tab-badge" style="position:absolute;top:4px;right:8px;background:#e8162a;color:#fff;font-size:9px;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 3px;font-weight:600">0</span>
     </button>
-    <button onclick="openMobileMore()" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 10px;background:none;border:none;color:#666;font-family:'Barlow',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><circle cx="3" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="13" cy="8" r="1.5"/></svg>More
+    <button class="tab-btn" onclick="openMobileMore()">
+      <svg viewBox="0 0 16 16" fill="currentColor"><circle cx="3" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="13" cy="8" r="1.5"/></svg>
+      More
     </button>
-    <button onclick="backToSite()" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 10px;background:none;border:none;color:#e84040;font-family:'Barlow',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3L4 8l5 5"/><line x1="4" y1="8" x2="13" y2="8"/></svg>Back
+    <button class="tab-btn" onclick="backToSite()" style="color:#e84040">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3L4 8l5 5"/><line x1="4" y1="8" x2="13" y2="8"/></svg>
+      Back
     </button>
   </div>
 
@@ -944,33 +938,98 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 </div>
 
 <style>
-/* shared admin inline styles */
-.owner-only{display:block}.s-nav-item{display:flex;align-items:center;gap:11px;padding:13px 18px;color:#666;cursor:pointer;transition:all .15s;border-left:2px solid transparent;font-size:13px}.s-nav-item:hover{color:#f0ece6;background:rgba(255,255,255,.03)}.s-nav-item.active{color:#e8162a;border-left-color:#e8162a;background:rgba(232,22,42,.06)}
-.search-box{background:#0f0f0f;border:1px solid #333;color:#f0ece6;padding:8px 12px;border-radius:5px;font-family:'Barlow',sans-serif;font-size:12px;outline:none;width:200px}
+/* ═══ ADMIN PANEL STYLES ═══ */
+.owner-only{display:block}
+
+/* Sidebar nav items */
+.s-nav-item{display:flex;align-items:center;gap:11px;padding:13px 18px;color:#666;cursor:pointer;transition:all .15s;border-left:2px solid transparent;font-size:13px;font-family:'Barlow',sans-serif}
+.s-nav-item:hover{color:#f0ece6;background:rgba(255,255,255,.03)}
+.s-nav-item.active{color:#e8162a;border-left-color:#e8162a;background:rgba(232,22,42,.06)}
+.s-nav-item svg{flex-shrink:0;opacity:.6}
+.s-nav-item.active svg{opacity:1}
+
+/* Search & filter */
+.search-box{background:#0f0f0f;border:1px solid #2a2a2a;color:#f0ece6;padding:9px 12px;border-radius:6px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;width:100%;max-width:260px;transition:border-color .2s}
 .search-box:focus{border-color:#e8162a}
-.f-btn{background:transparent;border:1px solid #333;color:#666;padding:6px 12px;border-radius:5px;font-size:11px;cursor:pointer;transition:all .15s;font-family:'Barlow',sans-serif}.f-btn.active,.f-btn:hover{background:#e8162a;border-color:#e8162a;color:#fff}
-.form-input{background:#0f0f0f;border:1px solid #333;color:#f0ece6;padding:9px 12px;border-radius:5px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;width:100%;transition:border-color .2s}.form-input:focus{border-color:#e8162a}.form-input option{background:#111}
-.overlay-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.85);backdrop-filter:blur(4px);align-items:center;justify-content:center}
-.overlay-modal.open{display:flex}
-.modal-box{background:#161616;border:1px solid #333;border-radius:8px;width:calc(100% - 32px);max-height:90vh;overflow-y:auto}
-.modal-head{padding:18px 20px;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px}
-.modal-close{background:none;border:none;color:#666;font-size:18px;cursor:pointer;padding:2px 6px}.modal-close:hover{color:#f0ece6}
-.modal-body{padding:20px}.modal-foot{padding:16px 20px;border-top:1px solid #222;display:flex;justify-content:flex-end;gap:8px}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}.f-group{display:flex;flex-direction:column;gap:5px}
-.f-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666}
-.btn-save{background:#e8162a;color:#fff;border:none;padding:9px 20px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer}.btn-save:hover{background:#ff2d42}
-.btn-cancel{background:transparent;border:1px solid #333;color:#666;padding:9px 20px;font-family:'Barlow',sans-serif;font-size:12px;cursor:pointer}.btn-cancel:hover{border-color:#f0ece6;color:#f0ece6}
-.exp-card{background:#161616;border-radius:8px;padding:14px;display:flex;align-items:center;justify-content:space-between;border-left:3px solid #e8162a}
+.f-btn{background:transparent;border:1px solid #2a2a2a;color:#666;padding:7px 14px;border-radius:6px;font-size:11px;cursor:pointer;transition:all .15s;font-family:'Barlow',sans-serif;letter-spacing:.5px}
+.f-btn.active,.f-btn:hover{background:#e8162a;border-color:#e8162a;color:#fff;font-weight:600}
+
+/* Table */
+table{width:100%;border-collapse:collapse}
+thead tr{background:#111}
+th{padding:10px 14px;text-align:left;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#666;font-weight:400;border-bottom:1px solid #222}
+td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;font-size:13px}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(255,255,255,.02)}
+
+/* Action buttons — column layout like SD reference */
+.action-col{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.a-btn{padding:5px 12px;font-size:10px;letter-spacing:.5px;border:1px solid #2a2a2a;background:#1a1a1a;color:#888;cursor:pointer;font-family:'Barlow',sans-serif;transition:all .15s;text-transform:uppercase;text-decoration:none;display:inline-block;border-radius:4px;white-space:nowrap;width:100%}
+.a-btn:hover{border-color:#f0ece6;color:#f0ece6}
+.a-btn.danger:hover{border-color:#e8162a;color:#e8162a}
+.a-btn.success:hover{border-color:#1db954;color:#1db954}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px;font-size:9px;letter-spacing:.5px;text-transform:uppercase;font-weight:600}
+.bdot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+.bg{background:rgba(29,185,84,.12);color:#1db954}
+.br{background:rgba(232,22,42,.12);color:#ff6b6b}
+.ba{background:rgba(232,144,32,.12);color:#e89020}
+.bb{background:rgba(59,130,246,.12);color:#3b82f6}
+
+/* Expiry cards */
+.exp-card{background:#161616;border-radius:8px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-left:3px solid #e8162a}
 .exp-card.warn{border-left-color:#e89020}
-.a-btn{padding:5px 10px;font-size:10px;letter-spacing:1px;border:1px solid #333;background:transparent;color:#666;cursor:pointer;font-family:'Barlow',sans-serif;transition:all .15s;text-transform:uppercase;text-decoration:none;display:inline-block}.a-btn:hover{border-color:#f0ece6;color:#f0ece6}.a-btn.danger:hover{border-color:#e8162a;color:#e8162a}.a-btn.success:hover{border-color:#1db954;color:#1db954}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-size:10px;letter-spacing:1px}
-.bdot{width:5px;height:5px;border-radius:50%;background:currentColor}
-.bg{background:rgba(29,185,84,.15);color:#1db954}.br{background:rgba(232,22,42,.15);color:#ff6b6b}.ba{background:rgba(232,144,32,.15);color:#e89020}.bb{background:rgba(59,130,246,.15);color:#3b82f6}
-.tab-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 10px;background:none;border:none;color:#666;font-family:'Barlow',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}.tab-btn.active{color:#e8162a}
-.more-btn{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#161616;border:1px solid #222;border-radius:8px;color:#f0ece6;font-family:'Barlow',sans-serif;font-size:14px;cursor:pointer;text-align:left;width:100%}
-td{padding:12px 14px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
-@media(max-width:900px){.f-row{grid-template-columns:1fr}#admin-sidebar{display:none!important}#bottom-tabs{display:flex!important}#admin-content{padding:14px 14px 80px}}
-@media(max-width:480px){.modal-box{width:calc(100% - 16px)}.search-box{width:100%}}
+
+/* Inputs */
+.form-input{background:#0f0f0f;border:1px solid #2a2a2a;color:#f0ece6;padding:10px 12px;border-radius:5px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;width:100%;transition:border-color .2s}
+.form-input:focus{border-color:#e8162a}
+.form-input option{background:#111}
+
+/* Modals */
+.overlay-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.88);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px}
+.overlay-modal.open{display:flex}
+.modal-box{background:#161616;border:1px solid #2a2a2a;border-radius:10px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
+.modal-head{padding:18px 20px;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#161616;z-index:2;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px}
+.modal-close{background:none;border:none;color:#666;font-size:20px;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:4px}
+.modal-close:hover{color:#f0ece6;background:rgba(255,255,255,.06)}
+.modal-body{padding:20px}
+.modal-foot{padding:14px 20px;border-top:1px solid #222;display:flex;justify-content:flex-end;gap:8px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.f-group{display:flex;flex-direction:column;gap:5px}
+.f-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#666}
+.btn-save{background:#e8162a;color:#fff;border:none;padding:10px 22px;border-radius:5px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;transition:background .2s}
+.btn-save:hover{background:#ff2d42}
+.btn-cancel{background:transparent;border:1px solid #333;color:#666;padding:10px 18px;border-radius:5px;font-family:'Barlow',sans-serif;font-size:12px;cursor:pointer;transition:all .2s}
+.btn-cancel:hover{border-color:#f0ece6;color:#f0ece6}
+
+/* Bottom tabs */
+.tab-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px 6px;background:none;border:none;color:#666;font-family:'Barlow',sans-serif;font-size:9px;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;flex:1;transition:color .15s;position:relative}
+.tab-btn.active{color:#e8162a}
+.tab-btn svg{width:20px;height:20px}
+
+/* More sheet */
+.more-btn{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#161616;border:1px solid #222;border-radius:8px;color:#f0ece6;font-family:'Barlow',sans-serif;font-size:14px;cursor:pointer;text-align:left;width:100%;transition:border-color .2s}
+.more-btn:hover{border-color:#333}
+
+/* Toast */
+#toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:#161616;color:#f0ece6;padding:10px 20px;border-radius:6px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;border:1px solid #2a2a2a;font-family:'Barlow',sans-serif}
+
+/* Admin responsive */
+@media(max-width:900px){
+  .f-row{grid-template-columns:1fr}
+  #admin-sidebar{display:none!important}
+  #bottom-tabs{display:flex!important}
+  #admin-content{padding:12px 12px 80px}
+  #stats-grid{grid-template-columns:1fr 1fr!important}
+  .search-box{max-width:100%}
+  table th:nth-child(3),table td:nth-child(3),
+  table th:nth-child(4),table td:nth-child(4){display:none}
+}
+@media(max-width:480px){
+  .modal-box{max-width:100%}
+  #admin-content{padding:10px 10px 80px}
+}
 </style>
 
 <script>
@@ -1156,7 +1215,10 @@ function showPage(name,el){
   document.querySelectorAll('.tab-btn').forEach(n=>n.classList.remove('active'));
   const pg=document.getElementById('page-'+name);if(pg)pg.style.display='block';
   const sn=document.getElementById('snav-'+name);if(sn)sn.classList.add('active');
-  if(el&&el.classList.contains('tab-btn'))el.classList.add('active');
+  // activate matching bottom tab
+  const tabMap={dashboard:'tab-home',members:'tab-members',expiring:'tab-expiring'};
+  if(tabMap[name]){const tb=document.getElementById(tabMap[name]);if(tb)tb.classList.add('active');}
+  else if(el&&el.classList.contains('tab-btn'))el.classList.add('active');
   const titles={dashboard:'Dashboard',members:'Members',payments:'Payments',expiring:'Expiring Soon',offers:'Special Offers',staff:'Staff Access'};
   document.getElementById('page-title').textContent=titles[name]||name;
   if(name==='members')renderTable();
@@ -1342,7 +1404,7 @@ function renderTable(){
     const sb2=ac?(ex?`<span class="badge ba"><span class="bdot"></span>${dl}d left</span>`:`<span class="badge bg"><span class="bdot"></span>Active</span>`):`<span class="badge br"><span class="bdot"></span>${dl<0?'Expired':'Inactive'}</span>`;
     const cb=m.cardio==='cardio'?`<span class="badge bb">Cardio</span>`:`<span class="badge" style="background:#1a1a1a;color:#666">Non-Cardio</span>`;
     const ow=currentRole==='owner'?`<button class="a-btn" onclick="editMember('${m.id}')">Edit</button><button class="a-btn ${ac?'danger':'success'}" onclick="toggleActive('${m.id}')">${ac?'Deact':'Activate'}</button><button class="a-btn danger" onclick="deleteMember('${m.id}')">Del</button>`:'';
-    return`<tr><td><div style="font-weight:500">${s(m.name)}</div><div style="font-size:10px;color:#666">${s(m.phone)}</div></td><td>${PLAN_LBL[m.plan]||m.plan}</td><td>${cb}</td><td style="font-size:11px;color:${dl<0?'#e8162a':dl<=5?'#e89020':'#666'}">${fmt(m.end)}</td><td>${sb2}</td><td><div style="display:flex;gap:5px;flex-wrap:wrap"><button class="a-btn" onclick="viewMember('${m.id}')">View</button><button class="a-btn success" onclick="openExtend('${m.id}')">Extend</button>${ow}</div></td></tr>`;
+    return`<tr><td><div style="font-weight:500">${s(m.name)}</div><div style="font-size:10px;color:#666">${s(m.phone)}</div></td><td>${PLAN_LBL[m.plan]||m.plan}</td><td>${cb}</td><td style="font-size:11px;color:${dl<0?'#e8162a':dl<=5?'#e89020':'#666'}">${fmt(m.end)}</td><td>${sb2}</td><td><div class="action-col"><button class="a-btn" onclick="viewMember('${m.id}')">View</button><button class="a-btn success" onclick="openExtend('${m.id}')">Extend</button>${ow}</div></td></tr>`;
   }).join('');
 }
 
