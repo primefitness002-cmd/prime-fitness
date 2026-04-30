@@ -14,6 +14,7 @@
   --red:#e8162a;--red2:#ff2d42;--yellow:#f5c200;
   --white:#f0ece6;--muted:#666;--muted2:#444;
   --font-d:'Bebas Neue',sans-serif;--font-b:'Barlow',sans-serif;
+  --r:8px;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--white);font-family:var(--font-b);font-weight:300;overflow-x:hidden}
@@ -82,7 +83,6 @@ nav.menu-open.scrolled{background:transparent!important}
 .marquee-item::after{content:'✦';color:rgba(255,255,255,.4);font-size:10px}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* SECTIONS */
 section{padding:110px 60px}
 .s-label{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:12px}
 .s-label::before{content:'';width:28px;height:1px;background:var(--red)}
@@ -192,7 +192,9 @@ footer{background:#0a0a0a;border-top:1px solid var(--border);padding:80px 60px 4
 .footer-bottom p{font-size:12px;color:var(--muted2)}
 .social{display:flex;gap:12px}.social a{color:var(--muted);transition:color .2s}.social a:hover{color:var(--red)}
 
-/* WA FLOAT */
+/* OFFERS PUBLIC */
+#offers-public{background:var(--bg2);padding:60px}
+#offers-public .offers-inner{max-width:1240px;margin:0 auto}
 .wa-float{position:fixed;bottom:26px;right:26px;z-index:200;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;transition:transform .2s}
 .wa-float:hover{transform:scale(1.1)}.wa-float svg{width:26px;height:26px;fill:white}
 
@@ -305,20 +307,49 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  nav{padding:0 20px}.nav-links{display:none}.hamburger{display:flex}.nav-cta{display:none}.nav-admin-btn{display:none}
-  section{padding:80px 24px}.hero{padding:68px 24px 80px}
-  .about-inner,.location-inner{grid-template-columns:1fr;gap:40px}
+  nav{padding:0 18px}
+  .nav-links{display:none}.hamburger{display:flex}.nav-cta{display:none}.nav-admin-btn{display:none}
+  section{padding:72px 20px}
+  .hero{padding:68px 20px 72px}
+  .hero-badge{position:static;display:inline-block;margin-bottom:16px;font-size:11px;animation:none;opacity:1}
+  .about-inner,.location-inner{grid-template-columns:1fr;gap:36px}
   .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
   .g-item{grid-column:auto!important;grid-row:auto!important}
   .plans-grid{grid-template-columns:1fr 1fr}
-  .trainer-inner{grid-template-columns:1fr}.trainer-img{min-height:300px}.trainer-content{padding:40px 24px}
-  .reels-grid{grid-template-columns:1fr}.map-embed{height:300px}
-  .footer-top{grid-template-columns:1fr 1fr;gap:40px}
-  .hero-stats{position:static;margin-top:40px;gap:24px}.hero-badge{top:80px;right:20px}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}.sidebar{display:none}.bottom-tabs{display:flex}
-  .content{padding:14px 14px 80px}.form-row{grid-template-columns:1fr}
+  .trainer-inner{grid-template-columns:1fr}.trainer-img{min-height:300px}.trainer-content{padding:36px 20px}
+  .reels-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto}.map-embed{height:280px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  .hero-stats{position:static;margin-top:36px;gap:24px;max-width:100%}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  #admin-sidebar{display:none!important}
+  #bottom-tabs{display:flex!important}
+  #admin-content{padding:14px 14px 80px}
+  #offers-public{padding:40px 20px}
+  .plans-hdr{margin-bottom:32px}
+  .reels-section{padding:60px 20px}
+  footer{padding:60px 20px 40px}
 }
-@media(max-width:480px){.plans-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}.hero-title{font-size:clamp(52px,16vw,90px)}}
+@media(max-width:480px){
+  section{padding:60px 16px}
+  .hero{padding:68px 16px 60px}
+  .hero-title{font-size:clamp(52px,16vw,90px)}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:10px}
+  .btn-red,.btn-ghost{width:100%;text-align:center;padding:14px 20px}
+  .hero-stats{gap:16px}
+  .h-stat-num{font-size:38px}
+  .plans-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:28px}
+  .gallery-grid{grid-template-columns:1fr}
+  .ngu-banner{flex-direction:column;gap:12px;text-align:center;padding:20px}
+  .ngu-divider{width:60px;height:2px}
+  .plan-price{font-size:46px}
+  .about-imgs .img-main img{height:220px}.about-imgs .img-sm img{height:150px}
+  .trainer-note{flex-direction:column;text-align:center}
+  #offers-public{padding:36px 16px}
+  footer{padding:48px 16px 36px}
+  .reels-section{padding:48px 16px}
+  .f-row{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -361,8 +392,8 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
-  <div class="hero-badge">MALEGAON'S #1 GYM</div>
   <div class="hero-content">
+    <div class="hero-badge">MALEGAON'S #1 GYM</div>
     <div class="hero-tag">Prime Fitness — Malegaon</div>
     <h1 class="hero-title"><span class="stroke">TRAIN</span><br><span class="accent">HARD.</span><br>STAY PRIME.</h1>
     <p class="hero-tagline">AC Gym · Expert Trainers · Real Results</p>
@@ -499,11 +530,11 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 </section>
 
 <!-- SPECIAL OFFERS (dynamic from Supabase) -->
-<section id="offers-public" style="background:var(--bg2);padding:60px 60px;display:none">
-  <div style="max-width:1240px;margin:0 auto">
+<section id="offers-public" style="display:none">
+  <div class="offers-inner">
     <div class="s-label">Limited Time</div>
     <h2 class="s-title" style="margin-bottom:32px">SPECIAL<br>OFFERS</h2>
-    <div id="public-offers-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px"></div>
+    <div id="public-offers-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px"></div>
   </div>
 </section>
 
@@ -920,6 +951,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 .f-btn{background:transparent;border:1px solid #333;color:#666;padding:6px 12px;border-radius:5px;font-size:11px;cursor:pointer;transition:all .15s;font-family:'Barlow',sans-serif}.f-btn.active,.f-btn:hover{background:#e8162a;border-color:#e8162a;color:#fff}
 .form-input{background:#0f0f0f;border:1px solid #333;color:#f0ece6;padding:9px 12px;border-radius:5px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;width:100%;transition:border-color .2s}.form-input:focus{border-color:#e8162a}.form-input option{background:#111}
 .overlay-modal{display:none;position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.85);backdrop-filter:blur(4px);align-items:center;justify-content:center}
+.overlay-modal.open{display:flex}
 .modal-box{background:#161616;border:1px solid #333;border-radius:8px;width:calc(100% - 32px);max-height:90vh;overflow-y:auto}
 .modal-head{padding:18px 20px;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px}
 .modal-close{background:none;border:none;color:#666;font-size:18px;cursor:pointer;padding:2px 6px}.modal-close:hover{color:#f0ece6}
@@ -938,6 +970,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 .more-btn{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#161616;border:1px solid #222;border-radius:8px;color:#f0ece6;font-family:'Barlow',sans-serif;font-size:14px;cursor:pointer;text-align:left;width:100%}
 td{padding:12px 14px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
 @media(max-width:900px){.f-row{grid-template-columns:1fr}#admin-sidebar{display:none!important}#bottom-tabs{display:flex!important}#admin-content{padding:14px 14px 80px}}
+@media(max-width:480px){.modal-box{width:calc(100% - 16px)}.search-box{width:100%}}
 </style>
 
 <script>
