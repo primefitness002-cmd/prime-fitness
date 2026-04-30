@@ -477,6 +477,15 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
   </div>
 </section>
 
+<!-- SPECIAL OFFERS (dynamic from Supabase) -->
+<section id="offers-public" style="display:none">
+  <div class="offers-inner">
+    <div class="s-label">Limited Time</div>
+    <h2 class="s-title" style="margin-bottom:32px">SPECIAL<br>OFFERS</h2>
+    <div id="public-offers-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px"></div>
+  </div>
+</section>
+
 <!-- PLANS -->
 <section class="plans" id="plans">
   <div class="plans-inner">
@@ -526,15 +535,6 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
         <div class="trainer-contact-text"><strong>+91 84592 36002</strong><small>Chat on WhatsApp</small></div>
       </a>
     </div>
-  </div>
-</section>
-
-<!-- SPECIAL OFFERS (dynamic from Supabase) -->
-<section id="offers-public" style="display:none">
-  <div class="offers-inner">
-    <div class="s-label">Limited Time</div>
-    <h2 class="s-title" style="margin-bottom:32px">SPECIAL<br>OFFERS</h2>
-    <div id="public-offers-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px"></div>
   </div>
 </section>
 
@@ -873,6 +873,13 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
   <div class="modal-box" style="max-width:520px">
     <div class="modal-head"><span id="view-name">Member</span><button onclick="closeModal('view-modal')" class="modal-close">✕</button></div>
     <div class="modal-body" id="view-body"></div>
+    <div class="modal-foot" id="view-foot" style="justify-content:space-between;align-items:center">
+      <div id="view-wa-link"></div>
+      <div style="display:flex;gap:8px">
+        <button id="view-extend-btn" class="btn-cancel" onclick="">Extend Plan</button>
+        <button class="btn-cancel" onclick="closeModal('view-modal')">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1234,7 +1241,7 @@ function showPage(name,el){
 function today(){return new Date().toISOString().split('T')[0];}
 function addDays(d,n){const dt=new Date(d);dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
 function daysLeft(e){return Math.ceil((new Date(e)-new Date(today()))/(864e5));}
-function fmt(d){if(!d)return'—';const[y,m,dy]=d.split('-');return`${dy}/${m}/${y}`;}
+function fmt(d){if(!d)return'—';const[y,m,dy]=d.split('-');return`${dy}/${m}/${String(y).slice(-2)}`;}
 function uid(){return 'id_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);}
 
 // ═══════════════════════════════════════════════════════
@@ -1341,6 +1348,10 @@ function viewMember(id){
     </div>
     ${m.notes?`<div style="background:#0f0f0f;border-radius:6px;padding:10px;margin-bottom:16px"><div style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Notes</div><div style="color:#666">${s(m.notes)}</div></div>`:''}
     <div><div style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Payment History</div>${ph}</div>`;
+  // Set footer: WhatsApp direct link + Extend button
+  const waMsg=`Hi ${m.name}! Prime Fitness ki taraf se reminder — aapki membership expire hone wali hai. Renew karein 💪 Contact: 8459236002`;
+  document.getElementById('view-wa-link').innerHTML=`<a href="https://wa.me/91${m.phone}?text=${encodeURIComponent(waMsg)}" target="_blank" class="btn-save" style="text-decoration:none;font-size:11px">WhatsApp</a>`;
+  document.getElementById('view-extend-btn').onclick=function(){closeModal('view-modal');openExtend(id);};
   openModal('view-modal');
 }
 
